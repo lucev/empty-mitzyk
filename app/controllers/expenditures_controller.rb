@@ -84,11 +84,11 @@ class ExpendituresController < ApplicationController
           format.html { render action: "edit" }
           format.json { render json: @expenditure.errors, status: :unprocessable_entity }
         end
-      else
-        flash[:notice] = "You don't have sufficient rights for this action!"
-        redirect_to root_path
-      end      
-    end
+      end
+    else
+      flash[:notice] = "You don't have sufficient rights for this action!"
+      redirect_to root_path
+    end      
   end
 
   # DELETE /expenditures/1
