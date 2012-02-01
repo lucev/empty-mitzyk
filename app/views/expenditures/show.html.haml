@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Amount:
+  = @expenditure.amount
+%p
+  %b Category:
+  = @expenditure.category_id
+%p
+  %b Description:
+  = @expenditure.description
+%p
+  %b Date:
+  = @expenditure.date
+
+= link_to 'Edit', edit_expenditure_path(@expenditure)
+\|
+= link_to 'Back', expenditures_path

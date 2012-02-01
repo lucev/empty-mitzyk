@@ -1,0 +1,25 @@
+%h1 Listing expenditures
+
+%table
+  %tr
+    %th Amount
+    %th Category
+    %th Description
+    %th Date
+    %th
+    %th
+    %th
+
+  - @expenditures.each do |expenditure|
+    %tr
+      %td= expenditure.amount
+      %td= expenditure.category.name
+      %td= expenditure.description
+      %td= expenditure.date
+      %td= link_to 'Show', expenditure
+      %td= link_to 'Edit', edit_expenditure_path(expenditure)
+      %td= link_to 'Destroy', expenditure, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Expenditure', new_expenditure_path
