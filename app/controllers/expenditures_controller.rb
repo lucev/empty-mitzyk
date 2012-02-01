@@ -17,9 +17,14 @@ class ExpendituresController < ApplicationController
   def show
     @expenditure = Expenditure.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @expenditure }
+    if @expenditure.owner? current_user
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @expenditure }
+      end
+    else
+      flash[:notice] = "You don't have sufficient rights for this action!"
+      redirect_to root_path
     end
   end
 
@@ -38,9 +43,14 @@ class ExpendituresController < ApplicationController
 
   # GET /expenditures/1/edit
   def edit
-    @expenditure = Expenditure.find(params[:id])
-    @categories = current_user.categories
-    @categories_array = @categories.map { |category| [category.name, category.id] }
+    if @expenditure.owner? current_user  
+      @expenditure = Expenditure.find(params[:id])
+      @categories = current_user.categories
+      @categories_array = @categories.map { |category| [category.name, category.id] }
+    else
+      flash[:notice] = "You don't have sufficient rights for this action!"
+      redirect_to root_path
+    end      
   end
 
   # POST /expenditures
@@ -65,14 +75,19 @@ class ExpendituresController < ApplicationController
   def update
     @expenditure = Expenditure.find(params[:id])
 
-    respond_to do |format|
-      if @expenditure.update_attributes(params[:expenditure])
-        format.html { redirect_to @expenditure, notice: 'Expenditure was successfully updated.' }
-        format.json { head :no_content }
+    if @expenditure.owner? current_user
+      respond_to do |format|
+        if @expenditure.update_attributes(params[:expenditure])
+          format.html { redirect_to @expenditure, notice: 'Expenditure was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @expenditure.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "edit" }
-        format.json { render json: @expenditure.errors, status: :unprocessable_entity }
-      end
+        flash[:notice] = "You don't have sufficient rights for this action!"
+        redirect_to root_path
+      end      
     end
   end
 
@@ -80,11 +95,17 @@ class ExpendituresController < ApplicationController
   # DELETE /expenditures/1.json
   def destroy
     @expenditure = Expenditure.find(params[:id])
-    @expenditure.destroy
+    
+    if @expenditure.owner? current_user
+      @expenditure.destroy
 
-    respond_to do |format|
-      format.html { redirect_to expenditures_url }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to expenditures_url }
+        format.json { head :no_content }
+      end
+    else
+      flash[:notice] = "You don't have sufficient rights for this action!"
+      redirect_to root_path
     end
   end
 end
