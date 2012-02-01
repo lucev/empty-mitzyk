@@ -42,9 +42,10 @@ class ExpendituresController < ApplicationController
   end
 
   # GET /expenditures/1/edit
-  def edit
-    if @expenditure.owner? current_user  
-      @expenditure = Expenditure.find(params[:id])
+  def edit 
+    @expenditure = Expenditure.find(params[:id])
+    
+    if @expenditure.owner? current_user       
       @categories = current_user.categories
       @categories_array = @categories.map { |category| [category.name, category.id] }
     else
