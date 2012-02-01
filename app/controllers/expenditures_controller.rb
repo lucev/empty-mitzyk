@@ -4,7 +4,7 @@ class ExpendituresController < ApplicationController
   # GET /expenditures
   # GET /expenditures.json
   def index
-    @expenditures = Expenditure.all
+    @expenditures = Expenditure.where("user_id = ?", current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
