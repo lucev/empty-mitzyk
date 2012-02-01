@@ -1,9 +1,11 @@
 Mitzyk::Application.routes.draw do
+  resources :expenditures
+
   devise_for :users
 
   resources :categories
   
-  root :to => 'categories#index'
+  root :to => 'expenditures#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
