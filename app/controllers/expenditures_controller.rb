@@ -47,10 +47,11 @@ class ExpendituresController < ApplicationController
   # POST /expenditures.json
   def create
     @expenditure = Expenditure.new(params[:expenditure])
+    @expenditure.user = current_user
 
     respond_to do |format|
       if @expenditure.save
-        format.html { redirect_to @expenditure, notice: 'Expenditure was successfully created.' }
+        format.html { redirect_to root_path }
         format.json { render json: @expenditure, status: :created, location: @expenditure }
       else
         format.html { render action: "new" }
