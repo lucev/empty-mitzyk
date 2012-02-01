@@ -15,7 +15,7 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
-group :development, :test do
+group :development do
   gem 'sqlite3'
 end
 
