@@ -2,10 +2,15 @@ Mitzyk::Application.routes.draw do
   resources :expenditures
 
   devise_for :users
+  
+  resources :users
 
   resources :categories
   
   root :to => 'expenditures#new'
+  
+  match 'limits' => 'users#limits', :as => :limits
+  match 'set_limits' => 'users#set_limits', :as => :set_limits
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

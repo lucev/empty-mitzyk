@@ -23,4 +23,7 @@ class User < ActiveRecord::Base
     end
     return sum
   end
+  
+  def spent_this_month
+  end
 end
