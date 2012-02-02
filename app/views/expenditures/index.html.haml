@@ -8,17 +8,15 @@
     %th Date
     %th
     %th
-    %th
 
   - @expenditures.each do |expenditure|
     %tr
-      %td= expenditure.amount
+      %td= number_to_currency(expenditure.amount,:locale => :hr)
       %td= expenditure.category.name
       %td= expenditure.description
-      %td= expenditure.date
-      %td= link_to 'Show', expenditure
+      %td= I18n.l expenditure.date, :locale => :hr
       %td= link_to 'Edit', edit_expenditure_path(expenditure)
-      %td= link_to 'Destroy', expenditure, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
