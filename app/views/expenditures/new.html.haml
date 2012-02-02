@@ -1,5 +1,6 @@
-%p
-  = 'Spent this week'
-  = current_user.spent_this_week
+%p.summary
+  = 'Spent this week: '
+  %span{:class => "spendings #{h weekly_spending_status}"}
+    = current_user.spent_this_week.to_s + ' kn'
 
 = render 'form'
