@@ -9,9 +9,9 @@ module ExpendituresHelper
     tolerance = 0.1
     expenditures = current_user.spent_this_week
     
-    if expenditures < (current_user.weekly_limit/7)*Date.today.wday*(1-tolerance)
+    if expenditures*(1+tolerance) < (current_user.weekly_limit/7)*Date.today.wday
       return 'green'
-    elsif expenditures > (current_user.weekly_limit/7)*Date.today.wday*(1+tolerance)
+    elsif expenditures*(1-tolerance) > (current_user.weekly_limit/7)*Date.today.wday
       return 'red'
     end
     else return 'yellow'
