@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     current_user.monthly_limit = params[:user][:monthly_limit] unless params[:user][:monthly_limit].nil?
     
     if current_user.save
-      redirect_to limits_path
+      redirect_to root_path
       flash[:notice] = "Limits successfully set"
     end
   end
