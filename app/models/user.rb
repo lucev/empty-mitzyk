@@ -16,6 +16,10 @@ class User < ActiveRecord::Base
     Expenditure.where("user_id = ? AND date >= ?", self.id, first_of_week)
   end
   
+  def month_expenditures
+    Expenditure.where("user_id = ? AND date >= ?", self.id, first_of_month)
+  end
+  
   def spent_this_week
     sum = (0.00).to_d
     self.week_expenditures.each do |expenditure|
@@ -25,5 +29,10 @@ class User < ActiveRecord::Base
   end
   
   def spent_this_month
+    sum = (0.00).to_d
+    self.month_expenditures.each do |expenditure|
+      sum += expenditure.amount
+    end
+    return sum
   end
 end

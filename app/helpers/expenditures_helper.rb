@@ -4,7 +4,6 @@ module ExpendituresHelper
     if current_user.weekly_limit.nil?
       return ''
     end
-    
     # 10% +- tolerance in spending limits
     tolerance = 0.1
     expenditures = current_user.spent_this_week
@@ -16,4 +15,5 @@ module ExpendituresHelper
     end
     else return 'yellow'
   end
+  
 end
