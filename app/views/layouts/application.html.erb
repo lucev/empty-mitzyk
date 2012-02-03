@@ -5,7 +5,11 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "scaffolds", "core" %>
-  <%= stylesheet_link_tag "opera_mini" if opera_mini? %>
+  <% if opera_mini? %>
+    <%= stylesheet_link_tag "opera_mini" %>
+  <% else %>
+    <%= stylesheet_link_tag "screen" %>
+  <% end %>
 </head>
 <body>
   <div id="wrap">
