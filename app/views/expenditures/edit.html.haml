@@ -1,6 +1,9 @@
 %h1 Editing expenditure
 
-= render 'form'
+- if opera_mini?
+  = render 'mobile_form'
+- else
+  = render 'form'
 
 = link_to 'Show', @expenditure
 \|

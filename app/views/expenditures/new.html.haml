@@ -12,4 +12,7 @@
         %span{:class => "#{h weekly_spending_status}"}
           = current_user.spent_this_week.to_s + ' kn'
 
-= render 'form'
+- if opera_mini?
+  = render 'mobile_form'
+- else
+  = render 'form'
