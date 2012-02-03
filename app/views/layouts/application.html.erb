@@ -2,35 +2,35 @@
 <html>
 <head>
   <title>Mitzyk</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <% if mobile? %>
-  <%= stylesheet_link_tag    "mobile"%>  
-  <% end %>  
+  <%= stylesheet_link_tag "scaffolds", "core" %>  
+  <%= stylesheet_link_tag "opera_mini" if opera_mini? %>
 </head>
 <body>
   <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p> 
-  <div id="user_nav">
-    <% if user_signed_in? %>
-      <%= link_to 'Home', root_path %>
-      |
-      <%= link_to 'Expenditures', expenditures_path %>
-      |
-      <%= link_to 'Categories', categories_path %>
-      |
-      <%= link_to 'Limits', limits_path %>      
-      |
-      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
-    <% end %>
-  </div>
+  <p class="alert"><%= alert %></p>
+    <div id="user_nav">
+      <% if user_signed_in? %>
+        <%= link_to 'Home', root_path %>
+        |
+        <%= link_to 'Expenditures', expenditures_path %>
+        |
+        <%= link_to 'Categories', categories_path %>
+        |
+        <%= link_to 'Limits', limits_path %>      
+        |
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+      <% end %>
+    </div>
   <%= yield %>
   <% if user_signed_in? %>
-    <hr/>
-    Signed in as <%= current_user.email %>
+    <div class="user_info">
+      <hr/>
+      Signed in as <%= current_user.email %>
+    </div>
   <% end %>
 
 </body>
