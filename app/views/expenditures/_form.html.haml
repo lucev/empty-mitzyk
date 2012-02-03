@@ -6,17 +6,28 @@
         - @expenditure.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :amount
-    = f.text_field :amount
-  .field
-    = f.label :category_id
-    = f.select :category_id, @categories_array
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :date
-    = f.date_select :date
-  .actions
-    = f.submit 'Save'
+  %table
+    %tr
+      %td
+        = f.label :amount
+      %td
+        = f.text_field :amount
+    %tr
+      %td
+        = f.label :category_id
+      %td
+        = f.select :category_id, @categories_array
+    %tr
+      %td
+        = f.label :description
+      %td
+        = f.text_field :description
+    %tr
+      %td
+        = f.label :date
+      %td
+        = f.date_select :date
+    %tr
+      %td
+      %td
+        = f.submit 'Save'
