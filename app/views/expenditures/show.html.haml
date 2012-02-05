@@ -2,10 +2,10 @@
 
 %p
   %b Amount:
-  = @expenditure.amount
+  = number_to_currency(@expenditure.amount, :locale => :hr)
 %p
   %b Category:
-  = @expenditure.category_id
+  = @expenditure.category.name
 %p
   %b Description:
   = @expenditure.description
