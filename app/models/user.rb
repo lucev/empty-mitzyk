@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
   
   def month_expenditures
-    Expenditure.where("user_id = ? AND date >= ? AND ofteness = ? OR ofteness = ?",
+    Expenditure.where("user_id = ? AND date >= ? AND (ofteness = ? OR ofteness = ?)",
       self.id, first_of_month, 'daily', 'monthly')
   end
   
