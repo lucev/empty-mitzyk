@@ -17,3 +17,27 @@ input {
 .user_info {
   display: none;
 }
+
+#progressbar {
+  height: 0.5em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.progressbar_green {
+  background-color: #00C90D;
+}
+
+.progressbar_yellow {
+  background-color: #FF9C00;
+}
+
+#amount {
+  height: 0.5em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #CCC;
+  float: left;
+}
