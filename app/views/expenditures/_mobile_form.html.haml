@@ -9,6 +9,9 @@
     = f.label :description
     = f.text_field :description
   .field
+    = f.label :ofteness
+    = f.select :ofteness, @ofteness    
+  .field
     = f.label :date
     = f.date_select :date
   .actions
