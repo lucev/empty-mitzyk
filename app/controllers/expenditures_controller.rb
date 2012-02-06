@@ -39,7 +39,7 @@ class ExpendituresController < ApplicationController
     if @month_percentage < 80
       @class = "progressbar_green"
     else
-      @class = "progressbar_red"
+      @class = "progressbar_yellow"
       if @month_percentage > 100
         @month_percentage = 100
       end
