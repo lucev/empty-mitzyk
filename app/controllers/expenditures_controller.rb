@@ -35,6 +35,15 @@ class ExpendituresController < ApplicationController
     @categories = current_user.categories
     @categories_array = @categories.map { |category| [category.name, category.id] }
     @ofteness = ["daily", "monthly", "extra"]
+    @month_percentage = current_user.month_percentage
+    if @month_percentage < 80
+      @class = "progressbar_green"
+    else
+      @class = "progressbar_red"
+      if @month_percentage > 100
+        @month_percentage = 100
+      end
+    end
         
     respond_to do |format|
       format.html # new.html.erb

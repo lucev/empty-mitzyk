@@ -16,3 +16,28 @@ td.spendings {
   font-size: 1.1em;
   font-weight: bold;
 }
+
+#progressbar {
+  height: 2em;
+  width: 42%;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.progressbar_green {
+  background-color: #00C90D;
+}
+
+.progressbar_red {
+  background-color: red;
+}
+
+#amount {
+  height: 2em;
+  -moz-border-radius: 0.2em;
+  border-radius: 0.2em;
+  background-color: #CCC;
+  float: left;
+}

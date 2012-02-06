@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
       self.id, first_of_month, 'daily', 'monthly')
   end
   
+  def month_percentage
+    ((self.spent_this_month / self.monthly_limit)*100).round(2)
+  end
+
   def spent_this_week
     sum = (0.00).to_d
     self.week_expenditures.each do |expenditure|
