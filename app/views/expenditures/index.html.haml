@@ -4,6 +4,7 @@
   %tr
     %th Amount
     %th Category
+    %th Type
     %th Description
     %th Date
     %th
@@ -13,6 +14,7 @@
     %tr
       %td= number_to_currency(expenditure.amount,:locale => :hr)
       %td= expenditure.category.name
+      %td= expenditure.ofteness
       %td= expenditure.description
       %td= I18n.l expenditure.date, :locale => :hr
       %td= link_to 'Edit', edit_expenditure_path(expenditure)

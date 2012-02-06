@@ -34,6 +34,7 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.new
     @categories = current_user.categories
     @categories_array = @categories.map { |category| [category.name, category.id] }
+    @ofteness = ["daily", "monthly", "extra"]
         
     respond_to do |format|
       format.html # new.html.erb
@@ -44,6 +45,7 @@ class ExpendituresController < ApplicationController
   # GET /expenditures/1/edit
   def edit 
     @expenditure = Expenditure.find(params[:id])
+    @ofteness = ["daily", "monthly", "extra"]
     
     if @expenditure.owner? current_user       
       @categories = current_user.categories

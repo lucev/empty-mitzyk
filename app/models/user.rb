@@ -13,11 +13,13 @@ class User < ActiveRecord::Base
   has_many :expenditures
   
   def week_expenditures
-    Expenditure.where("user_id = ? AND date >= ?", self.id, first_of_week)
+    Expenditure.where("user_id = ? AND date >= ? AND ofteness = ?",
+      self.id, first_of_week, 'daily')
   end
   
   def month_expenditures
-    Expenditure.where("user_id = ? AND date >= ?", self.id, first_of_month)
+    Expenditure.where("user_id = ? AND date >= ? AND ofteness = ? OR ofteness = ?",
+      self.id, first_of_month, 'daily', 'monthly')
   end
   
   def spent_this_week

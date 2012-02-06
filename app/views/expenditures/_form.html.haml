@@ -24,6 +24,11 @@
         = f.text_field :description
     %tr
       %td
+        = f.label :type
+      %td
+        = f.select :ofteness, @ofteness
+    %tr
+      %td
         = f.label :date
       %td
         = f.date_select :date
