@@ -144,7 +144,7 @@ DEPENDENCIES
   jquery-rails
   pg (~> 0.11)
   rails (= 3.2.1)
-  rspec-rails
+  rspec-rails (= 2.8.1)
   sass-rails (~> 3.2.3)
   sqlite3
   therubyracer
