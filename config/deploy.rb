@@ -18,6 +18,7 @@ set :deploy_to, "/srv/www/empty-pocket"
 namespace :deploy do
   task :start do
     run "cd /srv/www/empty-pocket; rails start"
+  end
 end
 
 # if you're still using the script/reaper helper you will need
