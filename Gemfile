@@ -15,6 +15,7 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'devise'
+gem 'capistrano'
 
 group :production do
   gem 'pg', '~> 0.11'
