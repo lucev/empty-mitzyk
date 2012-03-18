@@ -13,11 +13,13 @@ role :web, "#{application}"                           # Your HTTP server, Apache
 role :app, "#{application}"                          # This may be the same as your `Web` server
 role :db,  "#{application}", :primary => true # This is where Rails migrations will run
 
+ssh_options[:forward_agent] = true
+
 set :deploy_to, "/srv/www/empty-pocket"
 
 namespace :deploy do
   task :start do
-    run "cd /srv/www/empty-pocket; rails start"
+    run "cd /srv/www/empty-pocket/current; rails start"
   end
 end
 
