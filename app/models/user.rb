@@ -42,4 +42,18 @@ class User < ActiveRecord::Base
     end
     return sum
   end
+  
+  def range_expenditures(start_date, end_date)
+    Expenditure.where("user_id = ? AND date >= ? AND date <= ?",
+      self.id, start_date, end_date).order("date desc")
+  end
+  
+  def range_expenditures_sum(start_date, end_date)
+    expenditures = range_expenditures(start_date, end_date)
+    sum = (0.00).to_d
+    expenditures.each do |expenditure|
+      sum += expenditure.amount
+    end
+    return sum
+  end
 end

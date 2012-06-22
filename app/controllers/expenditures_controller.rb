@@ -1,11 +1,25 @@
 class ExpendituresController < ApplicationController
-
+  include ApplicationHelper
+  
   before_filter :authenticate_user!
   # GET /expenditures
   # GET /expenditures.json
   def index
-    @expenditures = Expenditure.where("user_id = ?", current_user.id).order("date desc")
-
+#    @start_date = Time.parse("#{params[:start_date]}") unless params[:start_date].nil?
+    if(params[:start_date].nil? or params[:end_date].nil?)
+      @range_start = first_of_month
+      @range_end = Date.today
+    else
+      @range_start = Date.civil(params[:start_date]["date(1i)"].to_i,
+                              params[:start_date]["date(2i)"].to_i,
+                              params[:start_date]["date(3i)"].to_i)
+      @range_end = Date.civil(params[:end_date]["date(1i)"].to_i,
+                            params[:end_date]["date(2i)"].to_i,
+                            params[:end_date]["date(3i)"].to_i,)        
+    end
+    @expenditures = current_user.range_expenditures(@range_start, @range_end)
+    @expenditures_sum = current_user.range_expenditures_sum(@range_start, @range_end)
+   
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @expenditures }

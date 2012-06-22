@@ -1,5 +1,22 @@
 %h1 Listing expenditures
 
+= form_tag 'expenditures', :method => :get do
+  %table
+    %tr
+      %td Select start date
+      %td=date_select :start_date, :date, :default => {:year => @range_start.year, :month => @range_start.month, :day => @range_start.day}
+    %tr
+      %td Select end date
+      %td=date_select :end_date, :date, :default => {:year => @range_end.year, :month => @range_end.month, :day => @range_end.day}
+    %tr
+      %td=submit_tag 'Submit'
+      %td
+
+%h3 Expenditures sum:
+%h2= number_to_currency(@expenditures_sum, :locale => :hr)
+  
+
+%h2 Expenditures listing
 %table
   %tr
     %th Amount
