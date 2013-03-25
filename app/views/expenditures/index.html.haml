@@ -9,7 +9,7 @@
       %td Select end date
       %td=date_select :end_date, :date, :default => {:year => @range_end.year, :month => @range_end.month, :day => @range_end.day}
     %tr
-      %td=submit_tag 'Submit'
+      %td=submit_tag 'Submit', class: 'btn btn-primary'
       %td
 
 %h3 Expenditures sum:
@@ -17,7 +17,7 @@
   
 
 %h2 Expenditures listing
-%table
+%table.table.table-striped.table-hover.table-condensed
   %tr
     %th Amount
     %th Category

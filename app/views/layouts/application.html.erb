@@ -4,7 +4,9 @@
   <title>Mitzyk</title>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <%= stylesheet_link_tag "scaffolds", "core" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag "scaffolds", "core", "bootstrap" %>
+  <%= stylesheet_link_tag "bootstrap-responsive" %>
   <% if opera_mini? %>
     <%= stylesheet_link_tag "opera_mini" %>
   <% else %>
@@ -12,20 +14,32 @@
   <% end %>
 </head>
 <body>
-  <div id="wrap">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-      <div id="user_nav">
+  <div id="wrap" class="container">
+    <% unless notice.nil? %>
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= notice %>
+      </div>
+    <% end %>
+    <% unless alert.nil? %>
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <%= alert %>
+      </div>
+    <% end %>
+      <div class="navbar">
         <% if user_signed_in? %>
-          <%= link_to 'Home', root_path %>
-          |
-          <%= link_to 'Expenditures', expenditures_path %>
-          |
-          <%= link_to 'Categories', categories_path %>
-          |
-          <%= link_to 'Limits', limits_path %>      
-          |
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li><%= link_to 'Home', root_path %></li>
+                <li><%= link_to 'Expenditures', expenditures_path %></li>
+                <li><%= link_to 'Categories', categories_path, :class => 'hidden-phone' %></li>
+                <li><%= link_to 'Limits', limits_path, :class => 'hidden-phone' %></li>
+                <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </div>
+          </div>
         <% end %>
       </div>
     <%= yield %>

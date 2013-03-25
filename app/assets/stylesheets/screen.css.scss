@@ -1,11 +1,20 @@
 #wrap {
   width: 780px;
   margin: auto;
+  margin-top: 1em;
   background-color: #EEE;
   padding: 2em;
   border: 1px solid #DDD;
   -moz-border-radius: 0.5em;
   border-radius: 0.5em;
+}
+
+@media (max-width: 854px) {
+  #wrap {
+    width: auto;
+    margin-top: 0.5em;
+    padding: 0.5em;
+  }
 }
 
 td.summary {
@@ -24,6 +33,12 @@ td.spendings {
   border-radius: 0.2em;
   margin-top: 1em;
   margin-bottom: 0.5em;
+}
+
+@media (max-width: 854px) {
+  #progressbar {
+    width: auto;
+  }
 }
 
 .progressbar_green {
