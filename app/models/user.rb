@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   
   def range_expenditures(start_date, end_date)
     Expenditure.where("user_id = ? AND date >= ? AND date <= ?",
-      self.id, start_date, end_date).order("date desc")
+      self.id, start_date, end_date).order("date DESC, created_at DESC")
   end
   
   def range_expenditures_sum(start_date, end_date)
