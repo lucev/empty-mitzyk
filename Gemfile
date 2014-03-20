@@ -17,6 +17,7 @@ gem 'therubyracer'
 gem 'devise'
 gem 'capistrano'
 gem 'newrelic_rpm'
+gem 'thread_safe', '0.2.0'
 
 group :production do
   gem 'pg', '~> 0.11'
