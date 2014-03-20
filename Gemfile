@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', '~> 3.2'
 
 gem 'haml'
 gem 'haml-rails', :group => :development
@@ -16,6 +16,7 @@ gem 'execjs'
 gem 'therubyracer'
 gem 'devise'
 gem 'capistrano'
+gem 'newrelic_rpm'
 
 group :production do
   gem 'pg', '~> 0.11'
@@ -26,5 +27,5 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '=2.8.1'
+  gem 'rspec-rails'
 end
