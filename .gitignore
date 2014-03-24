@@ -15,3 +15,4 @@
 /tmp
 .gitignore
 config/heroku_env.rb
+*.swp
