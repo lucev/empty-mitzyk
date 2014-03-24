@@ -15,4 +15,9 @@ describe Category do
     category = user.categories.build(:name => 'Transport')
     category.belongs_to?(user).should == true
   end
+
+  it 'has position' do
+    category = Category.new(:position => 2)
+    category.position.should == 2
+  end
 end
