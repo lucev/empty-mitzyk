@@ -14,8 +14,9 @@ describe Category do
   end
 
   it 'has right attributes' do
-    category = Category.new(:name => 'Traveling')
+    category = Category.new(@valid_attributes)
     category.name.should == 'Traveling'
+    category.position.should == 2
   end
   
   it 'belongs to user' do
@@ -24,9 +25,9 @@ describe Category do
     category.belongs_to?(user).should == true
   end
 
-  it 'has position' do
-    category = Category.new(:position => 2)
-    category.position.should == 2
+  it 'should be invalid without a name' do
+    category = Category.new(@valid_attributes.except(:name))
+    category.should_not be_valid
   end
 
   it 'should be invalid without a position' do
