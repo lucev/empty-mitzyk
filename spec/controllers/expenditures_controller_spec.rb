@@ -34,7 +34,9 @@ describe ExpendituresController do
 
   describe "GET index" do
     it "assigns all expenditures as @expenditures" do
-      expenditure = Expenditure.create! valid_attributes
+      expenditure = Expenditure.new valid_attributes
+      expenditure.user = @user
+      expenditure.save
       get :index, {}
       assigns(:expenditures).should eq([expenditure])
     end
