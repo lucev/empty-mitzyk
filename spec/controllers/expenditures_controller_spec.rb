@@ -26,18 +26,16 @@ describe ExpendituresController do
   def valid_attributes
     {:amount => 3.99}
   end
-  
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ExpendituresController. Be sure to keep this updated too.
-  def valid_session
-    {}
+
+  before :each do
+    @user = FactoryGirl.create :user
+    sign_in @user
   end
 
   describe "GET index" do
     it "assigns all expenditures as @expenditures" do
       expenditure = Expenditure.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:expenditures).should eq([expenditure])
     end
   end
@@ -45,14 +43,14 @@ describe ExpendituresController do
   describe "GET show" do
     it "assigns the requested expenditure as @expenditure" do
       expenditure = Expenditure.create! valid_attributes
-      get :show, {:id => expenditure.to_param}, valid_session
+      get :show, {:id => expenditure.to_param}
       assigns(:expenditure).should eq(expenditure)
     end
   end
 
   describe "GET new" do
     it "assigns a new expenditure as @expenditure" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:expenditure).should be_a_new(Expenditure)
     end
   end
@@ -60,7 +58,7 @@ describe ExpendituresController do
   describe "GET edit" do
     it "assigns the requested expenditure as @expenditure" do
       expenditure = Expenditure.create! valid_attributes
-      get :edit, {:id => expenditure.to_param}, valid_session
+      get :edit, {:id => expenditure.to_param}
       assigns(:expenditure).should eq(expenditure)
     end
   end
@@ -69,18 +67,18 @@ describe ExpendituresController do
     describe "with valid params" do
       it "creates a new Expenditure" do
         expect {
-          post :create, {:expenditure => valid_attributes}, valid_session
+          post :create, {:expenditure => valid_attributes}
         }.to change(Expenditure, :count).by(1)
       end
 
       it "assigns a newly created expenditure as @expenditure" do
-        post :create, {:expenditure => valid_attributes}, valid_session
+        post :create, {:expenditure => valid_attributes}
         assigns(:expenditure).should be_a(Expenditure)
         assigns(:expenditure).should be_persisted
       end
 
       it "redirects to the created expenditure" do
-        post :create, {:expenditure => valid_attributes}, valid_session
+        post :create, {:expenditure => valid_attributes}
         response.should redirect_to(Expenditure.last)
       end
     end
@@ -89,14 +87,14 @@ describe ExpendituresController do
       it "assigns a newly created but unsaved expenditure as @expenditure" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}, valid_session
+        post :create, {:expenditure => {}}
         assigns(:expenditure).should be_a_new(Expenditure)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}, valid_session
+        post :create, {:expenditure => {}}
         response.should render_template("new")
       end
     end
@@ -111,18 +109,18 @@ describe ExpendituresController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Expenditure.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => expenditure.to_param, :expenditure => {'these' => 'params'}}, valid_session
+        put :update, {:id => expenditure.to_param, :expenditure => {'these' => 'params'}}
       end
 
       it "assigns the requested expenditure as @expenditure" do
         expenditure = Expenditure.create! valid_attributes
-        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}, valid_session
+        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
         assigns(:expenditure).should eq(expenditure)
       end
 
       it "redirects to the expenditure" do
         expenditure = Expenditure.create! valid_attributes
-        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}, valid_session
+        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
         response.should redirect_to(expenditure)
       end
     end
@@ -132,7 +130,7 @@ describe ExpendituresController do
         expenditure = Expenditure.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}, valid_session
+        put :update, {:id => expenditure.to_param, :expenditure => {}}
         assigns(:expenditure).should eq(expenditure)
       end
 
@@ -140,7 +138,7 @@ describe ExpendituresController do
         expenditure = Expenditure.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}, valid_session
+        put :update, {:id => expenditure.to_param, :expenditure => {}}
         response.should render_template("edit")
       end
     end
@@ -150,13 +148,13 @@ describe ExpendituresController do
     it "destroys the requested expenditure" do
       expenditure = Expenditure.create! valid_attributes
       expect {
-        delete :destroy, {:id => expenditure.to_param}, valid_session
+        delete :destroy, {:id => expenditure.to_param}
       }.to change(Expenditure, :count).by(-1)
     end
 
     it "redirects to the expenditures list" do
       expenditure = Expenditure.create! valid_attributes
-      delete :destroy, {:id => expenditure.to_param}, valid_session
+      delete :destroy, {:id => expenditure.to_param}
       response.should redirect_to(expenditures_url)
     end
   end
