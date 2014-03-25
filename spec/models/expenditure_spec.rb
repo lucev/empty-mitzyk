@@ -12,7 +12,7 @@ describe Expenditure do
   end
   
   it 'belongs to user' do
-    expenditure = Expenditure.create!(:amount => 5.99)
+    expenditure = Expenditure.create!(@valid_attributes)
     user = User.create!(:email => 'foo@example.com')
     expenditure.user = user
     expenditure.save
