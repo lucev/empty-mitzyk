@@ -1,6 +1,12 @@
 require 'spec_helper'
+require 'date'
 
 describe Expenditure do
+
+  before :each do
+    @valid_attributes = {:amount => 3.99, :date => Date.today}
+  end
+
   it 'can be instantiated' do
     Expenditure.new.should be_instance_of(Expenditure)
   end
