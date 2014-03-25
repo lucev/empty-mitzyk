@@ -79,9 +79,9 @@ describe ExpendituresController do
         assigns(:expenditure).should be_persisted
       end
 
-      it "redirects to the created expenditure" do
+      it "redirects to home page" do
         post :create, {:expenditure => valid_attributes}
-        response.should redirect_to(Expenditure.last)
+        response.should redirect_to(root_path)
       end
     end
 
