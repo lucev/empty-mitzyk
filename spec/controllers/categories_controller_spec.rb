@@ -34,7 +34,9 @@ describe CategoriesController do
 
   describe "GET index" do
     it "assigns all categories as @categories" do
-      category = Category.create! valid_attributes
+      category = Category.new valid_attributes
+      category.user = @user
+      category.save
       get :index, {}
       assigns(:categories).should eq([category])
     end
