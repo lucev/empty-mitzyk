@@ -45,7 +45,9 @@ describe ExpendituresController do
 
   describe "GET show" do
     it "assigns the requested expenditure as @expenditure" do
-      expenditure = Expenditure.create! valid_attributes
+      expenditure = Expenditure.new valid_attributes
+      expenditure.user = @user
+      expenditure.save
       get :show, {:id => expenditure.to_param}
       assigns(:expenditure).should eq(expenditure)
     end
@@ -60,7 +62,9 @@ describe ExpendituresController do
 
   describe "GET edit" do
     it "assigns the requested expenditure as @expenditure" do
-      expenditure = Expenditure.create! valid_attributes
+      expenditure = Expenditure.new valid_attributes
+      expenditure.user = @user
+      expenditure.save
       get :edit, {:id => expenditure.to_param}
       assigns(:expenditure).should eq(expenditure)
     end
@@ -106,7 +110,9 @@ describe ExpendituresController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested expenditure" do
-        expenditure = Expenditure.create! valid_attributes
+        expenditure = Expenditure.new valid_attributes
+        expenditure.user = @user
+        expenditure.save
         # Assuming there are no other expenditures in the database, this
         # specifies that the Expenditure created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -116,13 +122,17 @@ describe ExpendituresController do
       end
 
       it "assigns the requested expenditure as @expenditure" do
-        expenditure = Expenditure.create! valid_attributes
+        expenditure = Expenditure.new valid_attributes
+        expenditure.user = @user
+        expenditure.save
         put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
         assigns(:expenditure).should eq(expenditure)
       end
 
       it "redirects to the expenditure" do
-        expenditure = Expenditure.create! valid_attributes
+        expenditure = Expenditure.new valid_attributes
+        expenditure.user = @user
+        expenditure.save
         put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
         response.should redirect_to(expenditure)
       end
@@ -130,7 +140,9 @@ describe ExpendituresController do
 
     describe "with invalid params" do
       it "assigns the expenditure as @expenditure" do
-        expenditure = Expenditure.create! valid_attributes
+        expenditure = Expenditure.new valid_attributes
+        expenditure.user = @user
+        expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
         put :update, {:id => expenditure.to_param, :expenditure => {}}
@@ -138,7 +150,9 @@ describe ExpendituresController do
       end
 
       it "re-renders the 'edit' template" do
-        expenditure = Expenditure.create! valid_attributes
+        expenditure = Expenditure.new valid_attributes
+        expenditure.user = @user
+        expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
         put :update, {:id => expenditure.to_param, :expenditure => {}}
@@ -149,14 +163,18 @@ describe ExpendituresController do
 
   describe "DELETE destroy" do
     it "destroys the requested expenditure" do
-      expenditure = Expenditure.create! valid_attributes
+      expenditure = Expenditure.new valid_attributes
+      expenditure.user = @user
+      expenditure.save
       expect {
         delete :destroy, {:id => expenditure.to_param}
       }.to change(Expenditure, :count).by(-1)
     end
 
     it "redirects to the expenditures list" do
-      expenditure = Expenditure.create! valid_attributes
+      expenditure = Expenditure.new valid_attributes
+      expenditure.user = @user
+      expenditure.save
       delete :destroy, {:id => expenditure.to_param}
       response.should redirect_to(expenditures_url)
     end
