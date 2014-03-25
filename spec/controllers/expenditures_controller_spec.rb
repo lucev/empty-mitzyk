@@ -24,7 +24,7 @@ describe ExpendituresController do
   # Expenditure. As you add validations to Expenditure, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {:amount => 3.99}
   end
   
   # This should return the minimal set of values that should be in the session
