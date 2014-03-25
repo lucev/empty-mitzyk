@@ -19,4 +19,9 @@ describe Expenditure do
     
     user.expenditures.count.should == 1
   end
+
+  it 'should be invalid without amount' do
+    expenditure = Expenditure.new(@valid_attributes.except(:amount))
+    expenditure.should_not be_valid
+  end
 end
