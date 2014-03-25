@@ -25,4 +25,18 @@ describe User do
     
     user.spent_this_week.should == 7.99
   end  
+
+  it 'has categories last position' do
+    user = FactoryGirl.create(:user)
+
+    category_travel = Category.create(:name => 'Travel', :position => 1)
+    category_travel.user = user
+    category_travel.save
+
+    category_transportation = Category.create(:name => 'Transportation', :position => 2)
+    category_transportation.user = user
+    category_transportation.save
+
+    user.categories_last_position.should == 2
+  end
 end

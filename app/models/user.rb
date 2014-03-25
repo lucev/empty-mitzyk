@@ -56,4 +56,8 @@ class User < ActiveRecord::Base
     end
     return sum
   end
+
+  def categories_last_position
+    self.categories.order(:position).last.position
+  end
 end
