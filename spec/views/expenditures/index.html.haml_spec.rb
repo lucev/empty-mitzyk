@@ -1,19 +1,28 @@
 require 'spec_helper'
+require 'date'
 
 describe "expenditures/index" do
   before(:each) do
     assign(:expenditures, [
       stub_model(Expenditure,
-        :amount => "",
+        :amount => 3.99,
+        :date => Date.today,
         :category_id => 1,
         :description => "Description"
       ),
       stub_model(Expenditure,
-        :amount => "",
+        :amount => 5.49,
+        :date => Date.today,
         :category_id => 1,
         :description => "Description"
       )
     ])
+    assign(:range_start,
+      Date.today - Date.today.mday + 1
+    )
+    assign(:range_end,
+      Date.today
+    )
   end
 
   it "renders a list of expenditures" do
