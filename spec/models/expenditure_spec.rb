@@ -24,4 +24,9 @@ describe Expenditure do
     expenditure = Expenditure.new(@valid_attributes.except(:amount))
     expenditure.should_not be_valid
   end
+
+  it 'should be invalid without date' do
+    expenditure = Expenditure.new(@valid_attributes.except(:date))
+    expenditure.should_not be_valid
+  end
 end
