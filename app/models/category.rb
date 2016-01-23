@@ -4,7 +4,6 @@ class Category < ActiveRecord::Base
   has_many :expenditures
 
   validates_presence_of :name
-  validates_presence_of :position
   
   def belongs_to? user
     self.user == user
