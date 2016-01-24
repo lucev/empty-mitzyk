@@ -29,9 +29,4 @@ describe Category do
     category = Category.new(@valid_attributes.except(:name))
     category.should_not be_valid
   end
-
-  it 'should be invalid without a position' do
-    category = Category.new(@valid_attributes.except(:position))
-    category.should_not be_valid
-  end
 end
