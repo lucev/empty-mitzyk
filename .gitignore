@@ -16,3 +16,4 @@
 .gitignore
 config/heroku_env.rb
 *.swp
+.ruby-version
