@@ -28,6 +28,10 @@ describe ExpendituresController do
     {:amount => 3.99, :date => Date.today}
   end
 
+  def invalid_attributes
+    { amount: nil, date: nil }
+  end
+
   before :each do
     @user = FactoryGirl.create :user
     sign_in @user
@@ -94,14 +98,14 @@ describe ExpendituresController do
       it "assigns a newly created but unsaved expenditure as @expenditure" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}
+        post :create, {:expenditure => invalid_attributes }
         assigns(:expenditure).should be_a_new(Expenditure)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}
+        post :create, {:expenditure => invalid_attributes }
         response.should render_template("new")
       end
     end
@@ -145,7 +149,7 @@ describe ExpendituresController do
         expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}
+        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
         assigns(:expenditure).should eq(expenditure)
       end
 
@@ -155,7 +159,7 @@ describe ExpendituresController do
         expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}
+        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
         response.should render_template("edit")
       end
     end
