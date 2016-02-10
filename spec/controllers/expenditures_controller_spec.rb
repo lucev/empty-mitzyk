@@ -25,7 +25,11 @@ describe ExpendituresController do
   # Expenditure. As you add validations to Expenditure, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {:amount => 3.99, :date => Date.today}
+    { amount: '3.99', date: Date.today.to_s }
+  end
+
+  def invalid_attributes
+    { amount: nil, date: nil }
   end
 
   before :each do
@@ -94,14 +98,14 @@ describe ExpendituresController do
       it "assigns a newly created but unsaved expenditure as @expenditure" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}
+        post :create, {:expenditure => invalid_attributes }
         assigns(:expenditure).should be_a_new(Expenditure)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => {}}
+        post :create, {:expenditure => invalid_attributes }
         response.should render_template("new")
       end
     end
@@ -117,8 +121,8 @@ describe ExpendituresController do
         # specifies that the Expenditure created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Expenditure.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => expenditure.to_param, :expenditure => {'these' => 'params'}}
+        Expenditure.any_instance.should_receive(:update_attributes).with(valid_attributes.stringify_keys)
+        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes }
       end
 
       it "assigns the requested expenditure as @expenditure" do
@@ -145,7 +149,7 @@ describe ExpendituresController do
         expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}
+        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
         assigns(:expenditure).should eq(expenditure)
       end
 
@@ -155,7 +159,7 @@ describe ExpendituresController do
         expenditure.save
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, :expenditure => {}}
+        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
         response.should render_template("edit")
       end
     end

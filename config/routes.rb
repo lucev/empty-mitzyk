@@ -9,8 +9,8 @@ Mitzyk::Application.routes.draw do
   
   root :to => 'expenditures#new'
   
-  match 'limits' => 'users#limits', :as => :limits
-  match 'set_limits' => 'users#set_limits', :as => :set_limits
+  get 'limits' => 'users#limits', :as => :limits
+  put 'set_limits' => 'users#set_limits', :as => :set_limits
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

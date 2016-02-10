@@ -24,9 +24,13 @@ describe CategoriesController do
   # Category. As you add validations to Category, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {:name => 'transportation', :position => 1}
+    {:name => 'transportation', :position => '1'}
   end
   
+  def invalid_attributes
+    { name: '', position: nil }
+  end
+
   before :each do
     @user = FactoryGirl.create :user
     sign_in @user
@@ -89,14 +93,14 @@ describe CategoriesController do
       it "assigns a newly created but unsaved category as @category" do
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
-        post :create, {:category => {}}
+        post :create, {:category => invalid_attributes }
         assigns(:category).should be_a_new(Category)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
-        post :create, {:category => {}}
+        post :create, {:category => invalid_attributes }
         response.should render_template("new")
       end
     end
@@ -110,8 +114,8 @@ describe CategoriesController do
         # specifies that the Category created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Category.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => category.to_param, :category => {'these' => 'params'}}
+        Category.any_instance.should_receive(:update_attributes).with(valid_attributes)
+        put :update, {:id => category.to_param, :category => valid_attributes }
       end
 
       it "assigns the requested category as @category" do
@@ -132,7 +136,7 @@ describe CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
-        put :update, {:id => category.to_param, :category => {}}
+        put :update, {:id => category.to_param, category: invalid_attributes }
         assigns(:category).should eq(category)
       end
 
@@ -140,7 +144,7 @@ describe CategoriesController do
         category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
-        put :update, {:id => category.to_param, :category => {}}
+        put :update, {:id => category.to_param, category: invalid_attributes }
         response.should render_template("edit")
       end
     end

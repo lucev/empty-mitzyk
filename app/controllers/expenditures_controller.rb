@@ -82,7 +82,7 @@ class ExpendituresController < ApplicationController
   # POST /expenditures
   # POST /expenditures.json
   def create
-    @expenditure = Expenditure.new(params[:expenditure])
+    @expenditure = Expenditure.new(expenditure_params)
     @expenditure.user = current_user
 
     respond_to do |format|
@@ -103,7 +103,7 @@ class ExpendituresController < ApplicationController
 
     if @expenditure.owner? current_user
       respond_to do |format|
-        if @expenditure.update_attributes(params[:expenditure])
+        if @expenditure.update_attributes(expenditure_params)
           format.html { redirect_to @expenditure, notice: 'Expenditure was successfully updated.' }
           format.json { head :no_content }
         else
@@ -134,4 +134,11 @@ class ExpendituresController < ApplicationController
       redirect_to root_path
     end
   end  
+
+  private
+
+  def expenditure_params
+    params.require(:expenditure).permit(:amount, :category_id, :description,
+                                        :ofteness, :date)
+  end
 end

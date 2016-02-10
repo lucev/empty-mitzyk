@@ -33,4 +33,5 @@ RSpec.configure do |config|
   # Enable Devise authentication in specs
   config.include Devise::TestHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
+  config.infer_spec_type_from_file_location!
 end
