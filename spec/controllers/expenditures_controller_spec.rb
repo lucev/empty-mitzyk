@@ -25,7 +25,7 @@ describe ExpendituresController do
   # Expenditure. As you add validations to Expenditure, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {:amount => 3.99, :date => Date.today}
+    { amount: '3.99', date: Date.today.to_s }
   end
 
   def invalid_attributes
@@ -121,8 +121,8 @@ describe ExpendituresController do
         # specifies that the Expenditure created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Expenditure.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:id => expenditure.to_param, :expenditure => {'these' => 'params'}}
+        Expenditure.any_instance.should_receive(:update_attributes).with(valid_attributes.stringify_keys)
+        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes }
       end
 
       it "assigns the requested expenditure as @expenditure" do
