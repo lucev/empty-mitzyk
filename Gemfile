@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.1'
 
 gem 'haml'
 gem 'haml-rails', :group => :development
 
-gem 'sass-rails',   '~> 4.0'
-gem 'coffee-rails', '~> 4.0'
+gem 'sass-rails'
+gem 'coffee-rails'
 gem 'uglifier', '>= 1.0.3'
 
 gem 'jquery-rails'
