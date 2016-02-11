@@ -14,7 +14,4 @@
       %span{:class => "#{h weekly_spending_status}"}
         = number_to_currency(current_user.spent_this_week, :locale => :hr)
 
-- if opera_mini?
-  = render 'mobile_form'
-- else
-  = render 'form'
+= render 'form'
