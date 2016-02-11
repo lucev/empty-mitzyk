@@ -5,11 +5,6 @@ class ApplicationController < ActionController::Base
  def mobile?  
    !(request.user_agent =~ /Mobile|webOS/).nil?
  end
- 
- def opera_mini?
-   !(request.user_agent =~ /Opera Mini/).nil?
- end
 
  helper_method :mobile?
- helper_method :opera_mini?
 end
