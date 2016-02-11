@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.2.2'
 
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 
 gem 'haml'
 gem 'haml-rails', :group => :development
@@ -16,7 +16,7 @@ gem 'therubyracer'
 gem 'devise'
 gem 'capistrano'
 gem 'newrelic_rpm'
-gem 'thread_safe', '0.2.0'
+gem 'thread_safe'
 
 group :production do
   gem 'pg'
