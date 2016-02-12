@@ -1,4 +1,4 @@
-= form_for @user, :url => set_limits_path, method: :put do |f|
+= simple_form_for @user, :url => set_limits_path, method: :put do |f|
   -if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this expenditure from being saved:"
@@ -7,10 +7,8 @@
           %li= msg
 
   .field
-    = f.label :monthly_limit
-    = f.text_field :monthly_limit
+    = f.input :monthly_limit
   .field
-    = f.label :weekly_limit
-    = f.text_field :weekly_limit
+    = f.input :weekly_limit
   .actions
     = f.submit 'Save', class: 'btn btn-primary'
