@@ -17,6 +17,7 @@ gem 'devise'
 gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'thread_safe'
+gem 'simple_form'
 
 group :production do
   gem 'pg'
