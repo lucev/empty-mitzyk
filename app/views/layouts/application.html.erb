@@ -21,11 +21,11 @@
         <%= alert %>
       </div>
     <% end %>
-      <div class="navbar">
+      <div class="navbar navbar-default">
         <% if user_signed_in? %>
-          <div class="navbar-inner">
+          <div class="navbar-header">
             <div class="container">
-              <ul class="nav">
+              <ul class="nav navbar-nav">
                 <li><%= link_to 'Home', root_path %></li>
                 <li><%= link_to 'Expenditures', expenditures_path %></li>
                 <li><%= link_to 'Categories', categories_path, :class => 'hidden-phone' %></li>

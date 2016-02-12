@@ -6,7 +6,7 @@
         - @category.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.input :name
-  .actions
+  .form-group
+    = f.input :name, input_html: { class: 'form-control' }
+  .form-group.actions
     = f.submit 'Save', class: 'btn btn-primary'
