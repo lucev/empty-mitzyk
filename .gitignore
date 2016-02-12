@@ -17,3 +17,4 @@
 config/heroku_env.rb
 *.swp
 .ruby-version
+/coverage
