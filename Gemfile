@@ -18,6 +18,9 @@ gem 'capistrano'
 gem 'newrelic_rpm'
 gem 'thread_safe'
 gem 'simple_form'
+gem 'font-awesome-rails'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
 
 group :production do
   gem 'pg'
