@@ -17,6 +17,6 @@
     = f.input :ofteness, label: 'Limit', collection: @ofteness,
               input_html: { class: 'form-control' }
   .form-group
-    = f.input :date, input_html: { class: 'form-control' }
+    = f.input :date, as: :date_picker, input_html: { class: 'form-control', data: {date_options: {defaultDate: Date.today }} }
   .form-group
     = f.submit 'Save', class: 'btn btn-primary'
