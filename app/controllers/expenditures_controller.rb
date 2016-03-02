@@ -13,6 +13,10 @@ class ExpendituresController < ApplicationController
     @expenditures = apply_scopes(current_user.expenditures)
     @expenditures_sum = @expenditures.sum(:amount)
    
+    if current_scopes[:category].present?
+      @category = current_user.categories.find_by_id(current_scopes[:category])
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @expenditures }

@@ -3,9 +3,13 @@
 .row
   .dropdown.pull-left
     %button.btn.btn-default.dropdown-toggle{ data: { toggle: 'dropdown' }}
-      Categories
+      =  @category.present? ? @category.name : 'Categories'
       %span.caret
     %ul.dropdown-menu
+      - if @category.present?
+        %li
+          = link_to 'All', current_scopes.merge(category: nil)
+        %li.divider
       - current_user.categories.each do |category|
         %li
           = link_to category.name, current_scopes.merge(category: category.id)
