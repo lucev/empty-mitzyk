@@ -1,5 +1,21 @@
 %h1 Listing expenditures
 
+%div
+  = link_to 'This Week', current_scopes.merge(period_start: Date.today.beginning_of_week, period_end: nil), class: 'btn btn-default btn-sm'
+  = link_to 'This Month', current_scopes.merge(period_start: Date.today.beginning_of_month, period_end: nil), class: 'btn btn-default btn-sm'
+  = link_to 'Previous Week', current_scopes.merge(period_start: Date.today.beginning_of_week - 1.week, period_end: Date.today.end_of_week - 1.week), class: 'btn btn-default btn-sm'
+  = link_to 'Previous Month', current_scopes.merge(period_start: Date.today.beginning_of_month - 1.month, period_end: Date.today.end_of_month - 1.month), class: 'btn btn-default btn-sm'
+  = link_to 'This Year', current_scopes.merge(period_start: Date.today.beginning_of_year, period_end: nil), class: 'btn btn-default btn-sm'
+
+%h4
+  - if current_scopes[:period_start].present?
+    From:
+    = I18n.l(Date.strptime(current_scopes[:period_start]), format: :long)
+
+  - if current_scopes[:period_end].present?
+    To:
+    = I18n.l(Date.strptime(current_scopes[:period_end]), format: :long)
+
 %h3 Expenditures sum:
 %h2= number_to_currency(@expenditures_sum, :locale => :hr)
   
