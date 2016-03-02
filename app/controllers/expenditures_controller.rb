@@ -5,6 +5,7 @@ class ExpendituresController < ApplicationController
 
   has_scope :period_start
   has_scope :period_end
+  has_scope :category
 
   # GET /expenditures
   # GET /expenditures.json

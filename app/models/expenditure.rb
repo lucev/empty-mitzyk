@@ -8,6 +8,7 @@ class Expenditure < ActiveRecord::Base
 
   scope :period_start,  -> value { where("date >= ?", value) }
   scope :period_end,    -> value { where("date <= ?", value) }
+  scope :category,      -> value { where("category_id = ?", value) }
 
   def owner? user
     self.user == user
