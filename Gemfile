@@ -3,8 +3,7 @@ ruby '2.2.2'
 
 gem 'rails', '~> 4.2'
 
-gem 'haml'
-gem 'haml-rails', :group => :development
+gem 'slim'
 
 gem 'sass-rails'
 gem 'coffee-rails'

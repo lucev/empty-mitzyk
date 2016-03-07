@@ -1,17 +1,17 @@
-%h1 Listing expenditures
+h1 Listing expenditures
 
 .row
   .dropdown.pull-left
-    %button.btn.btn-default.dropdown-toggle{ data: { toggle: 'dropdown' }}
+    button.btn.btn-default.dropdown-toggle data-toggle='dropdown'
       =  @category.present? ? @category.name : 'Categories'
-      %span.caret
-    %ul.dropdown-menu
+      span.caret
+    ul.dropdown-menu
       - if @category.present?
-        %li
+        li
           = link_to 'All', current_scopes.merge(category: nil)
-        %li.divider
+        li.divider
       - current_user.categories.each do |category|
-        %li
+        li
           = link_to category.name, current_scopes.merge(category: category.id)
 
   .pull-right
@@ -24,39 +24,39 @@
 .row.text-right
   - if current_scopes[:period_start].present?
     .row
-      %h4
-        From:
+      h4
+        'From:
         = I18n.l(Date.strptime(current_scopes[:period_start]), format: :long)
 
   - if current_scopes[:period_end].present?
     .row
-      %h4
-        To:
+      h4
+        'To:
         = I18n.l(Date.strptime(current_scopes[:period_end]), format: :long)
 
-%h3 Expenditures sum:
-%h2= number_to_currency(@expenditures_sum, :locale => :hr)
+h3 Expenditures sum:
+h2= number_to_currency(@expenditures_sum, :locale => :hr)
   
 
-%h2 Expenditures listing
-%table.table.table-striped.table-hover.table-condensed
-  %tr
-    %th Amount
-    %th Category
-    %th Description
-    %th Date
-    %th
-    %th
+h2 Expenditures listing
+table.table.table-striped.table-hover.table-condensed
+  tr
+    th Amount
+    th Category
+    th Description
+    th Date
+    th
+    th
 
   - @expenditures.each do |expenditure|
-    %tr
-      %td= number_to_currency(expenditure.amount,:locale => :hr)
-      %td= expenditure.category.name
-      %td= expenditure.description
-      %td= I18n.l expenditure.date, :locale => :hr
-      %td= link_to 'Edit', edit_expenditure_path(expenditure)
-      %td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
+    tr
+      td= number_to_currency(expenditure.amount,:locale => :hr)
+      td= expenditure.category.name
+      td= expenditure.description
+      td= I18n.l expenditure.date, :locale => :hr
+      td= link_to 'Edit', edit_expenditure_path(expenditure)
+      td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
 
-%br
+br
 
 = link_to 'New Expenditure', new_expenditure_path
