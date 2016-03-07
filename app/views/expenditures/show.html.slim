@@ -1,18 +1,18 @@
-%p#notice= notice
+p#notice= notice
 
-%p
-  %b Amount:
+p
+  b Amount:
   = number_to_currency(@expenditure.amount, :locale => :hr)
-%p
-  %b Category:
+p
+  b Category:
   = @expenditure.category.name
-%p
-  %b Description:
+p
+  b Description:
   = @expenditure.description
-%p
-  %b Date:
+p
+  b Date:
   = @expenditure.date
 
 = link_to 'Edit', edit_expenditure_path(@expenditure)
-\|
+'
 = link_to 'Back', expenditures_path

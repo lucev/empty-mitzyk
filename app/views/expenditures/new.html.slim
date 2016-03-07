@@ -1,0 +1,17 @@
+div#progressbar class=@class
+  div#amount style=("width:#{@month_percentage}%")
+
+table
+  tr
+    td.summary
+      = 'Spent this month: '
+    td.spendings
+      = number_to_currency(current_user.spent_this_month, :locale => :hr)
+  tr
+    td.summary
+      = 'Spent this week: '
+    td.spendings
+      span class=("#{h weekly_spending_status}")
+        = number_to_currency(current_user.spent_this_week, :locale => :hr)
+
+= render 'form'

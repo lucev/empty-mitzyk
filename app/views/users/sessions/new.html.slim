@@ -1,4 +1,4 @@
-%h2
+h2
   = 'Sign in'
 
 = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
@@ -15,7 +15,7 @@
       = f.input :remember_me, as: :boolean,
         input_html: { class: 'form-control', checked: true }
 
-  %div
+  div
     = f.submit "Sign in", class: 'btn btn-primary'
 
 = render "devise/shared/links"
