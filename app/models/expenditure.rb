@@ -12,6 +12,8 @@ class Expenditure < ActiveRecord::Base
   scope :period_start,  -> value { where("date >= ?", value) }
   scope :period_end,    -> value { where("date <= ?", value) }
   scope :category,      -> value { where("category_id = ?", value) }
+  scope :daily,         -> { where ofteness: 'daily' }
+  scope :monthly,       -> { where('ofteness = ? OR ofteness = ?', 'daily', 'monthly') }
 
   def owner? user
     self.user == user

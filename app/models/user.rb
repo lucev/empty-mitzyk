@@ -11,14 +11,14 @@ class User < ActiveRecord::Base
   
   has_many :categories
   has_many :expenditures
-  
+
   def week_expenditures
-    expenditures.where("ofteness = ?", 'daily').
+    expenditures.daily.
       period(Date.today.beginning_of_week, Date.today.end_of_week)
   end
   
   def month_expenditures
-    expenditures.where("ofteness = ? OR ofteness = ?", 'daily', 'monthly').
+    expenditures.monthly.
       period(Date.today.beginning_of_month, Date.today.end_of_month)
   end
   
