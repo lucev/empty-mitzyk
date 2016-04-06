@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
     month_expenditures.sum(:amount)
   end
 
+  def lower_tolerance
+    (weekly_limit/7)*Date.today.wday*(1 - Rails.configuration.limit_tolerance)
+  end
+
+  def upper_tolerance
+    (weekly_limit/7)*Date.today.wday*(1 + Rails.configuration.limit_tolerance)
+  end
+
   def categories_last_position
     self.categories.order(:position).last.position
   end

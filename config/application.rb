@@ -65,5 +65,8 @@ module Mitzyk
       g.test_framework :rspec, :views => false
       g.template_engine :haml
     end
+
+    # 10% +- tolerance in spending limits
+    config.limit_tolerance = 0.1
   end
 end
