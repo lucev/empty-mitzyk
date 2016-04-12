@@ -36,7 +36,7 @@ group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: false
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :development, :test do
