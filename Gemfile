@@ -18,8 +18,8 @@ gem 'newrelic_rpm'
 gem 'thread_safe'
 gem 'simple_form'
 gem 'font-awesome-rails'
-gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
-gem 'momentjs-rails', '~> 2.9', github: 'derekprior/momentjs-rails'
+gem 'datetimepicker-rails', git: 'https://github.com/zpaulovics/datetimepicker-rails.git', branch: 'master', submodules: true
+gem 'momentjs-rails', '~> 2.9', git: 'https://github.com/derekprior/momentjs-rails.git'
 gem 'has_scope'
 gem 'rubocop', require: false
 
