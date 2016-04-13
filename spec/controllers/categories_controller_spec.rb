@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe CategoriesController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Category. As you add validations to Category, be sure to
-  # update the return value of this method accordingly.
+  let(:user) { FactoryGirl.create(:user) }
+  let(:category) { FactoryGirl.create(:category, user: user) }
+
   def valid_attributes
     {:name => 'transportation', :position => '1'}
   end
@@ -13,24 +13,20 @@ describe CategoriesController do
     { name: '', position: nil }
   end
 
-  before :each do
-    @user = FactoryGirl.create :user
-    sign_in @user
-  end
+  before { sign_in user }
 
   describe "GET index" do
     it "assigns all categories as @categories" do
-      category = FactoryGirl.create :category, user: @user
-
       get :index, {}
+
       assigns(:categories).should eq([category])
     end
   end
 
   describe "GET show" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
       get :show, {:id => category.to_param}
+
       assigns(:category).should eq(category)
     end
   end
@@ -38,14 +34,15 @@ describe CategoriesController do
   describe "GET new" do
     it "assigns a new category as @category" do
       get :new, {}
+
       assigns(:category).should be_a_new(Category)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested category as @category" do
-      category = Category.create! valid_attributes
       get :edit, {:id => category.to_param}
+
       assigns(:category).should eq(category)
     end
   end
@@ -60,12 +57,14 @@ describe CategoriesController do
 
       it "assigns a newly created category as @category" do
         post :create, {:category => valid_attributes}
+
         assigns(:category).should be_a(Category)
         assigns(:category).should be_persisted
       end
 
       it "redirects to the created category" do
         post :create, {:category => valid_attributes}
+
         response.should redirect_to(Category.last)
       end
     end
@@ -90,7 +89,6 @@ describe CategoriesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested category" do
-        category = Category.create! valid_attributes
         # Assuming there are no other categories in the database, this
         # specifies that the Category created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -100,32 +98,32 @@ describe CategoriesController do
       end
 
       it "assigns the requested category as @category" do
-        category = Category.create! valid_attributes
         put :update, {:id => category.to_param, :category => valid_attributes}
+
         assigns(:category).should eq(category)
       end
 
       it "redirects to the category" do
-        category = Category.create! valid_attributes
         put :update, {:id => category.to_param, :category => valid_attributes}
+
         response.should redirect_to(category)
       end
     end
 
     describe "with invalid params" do
       it "assigns the category as @category" do
-        category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         put :update, {:id => category.to_param, category: invalid_attributes }
+
         assigns(:category).should eq(category)
       end
 
       it "re-renders the 'edit' template" do
-        category = Category.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Category.any_instance.stub(:save).and_return(false)
         put :update, {:id => category.to_param, category: invalid_attributes }
+
         response.should render_template("edit")
       end
     end
