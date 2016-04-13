@@ -7,8 +7,6 @@ class ExpendituresController < ApplicationController
   has_scope :period_end
   has_scope :category
 
-  # GET /expenditures
-  # GET /expenditures.json
   def index
     @expenditures = apply_scopes(current_user.expenditures)
     @expenditures_sum = @expenditures.sum(:amount)
@@ -16,31 +14,17 @@ class ExpendituresController < ApplicationController
     if current_scopes[:category].present?
       @category = current_user.categories.find_by_id(current_scopes[:category])
     end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @expenditures }
-    end
   end
 
-  # GET /expenditures/1
-  # GET /expenditures/1.json
   def show
     @expenditure = Expenditure.find(params[:id])
 
-    if @expenditure.owner? current_user
-      respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @expenditure }
-      end
-    else
+    unless@expenditure.owner? current_user
       flash[:notice] = "You don't have sufficient rights for this action!"
       redirect_to root_path
     end
   end
 
-  # GET /expenditures/new
-  # GET /expenditures/new.json
   def new
     @expenditure = Expenditure.new
     @categories = current_user.categories
@@ -55,14 +39,8 @@ class ExpendituresController < ApplicationController
         @month_percentage = 100
       end
     end
-        
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @expenditure }
-    end
   end
 
-  # GET /expenditures/1/edit
   def edit 
     @expenditure = Expenditure.find(params[:id])
     @ofteness = ["daily", "monthly", "extra"]
@@ -76,37 +54,25 @@ class ExpendituresController < ApplicationController
     end      
   end
 
-  # POST /expenditures
-  # POST /expenditures.json
   def create
     @expenditure = Expenditure.new(expenditure_params)
     @expenditure.user = current_user
 
-    respond_to do |format|
-      if @expenditure.save
-        format.html { redirect_to root_path }
-        format.json { render json: @expenditure, status: :created, location: @expenditure }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @expenditure.errors, status: :unprocessable_entity }
-      end
+    if @expenditure.save
+      redirect_to root_path
+    else
+      render action: "new"
     end
   end
 
-  # PUT /expenditures/1
-  # PUT /expenditures/1.json
   def update
     @expenditure = Expenditure.find(params[:id])
 
     if @expenditure.owner? current_user
-      respond_to do |format|
-        if @expenditure.update_attributes(expenditure_params)
-          format.html { redirect_to @expenditure, notice: 'Expenditure was successfully updated.' }
-          format.json { head :no_content }
-        else
-          format.html { render action: "edit" }
-          format.json { render json: @expenditure.errors, status: :unprocessable_entity }
-        end
+      if @expenditure.update_attributes(expenditure_params)
+        redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
+      else
+        render action: "edit"
       end
     else
       flash[:notice] = "You don't have sufficient rights for this action!"
@@ -114,18 +80,12 @@ class ExpendituresController < ApplicationController
     end      
   end
 
-  # DELETE /expenditures/1
-  # DELETE /expenditures/1.json
   def destroy
     @expenditure = Expenditure.find(params[:id])
     
     if @expenditure.owner? current_user
       @expenditure.destroy
-
-      respond_to do |format|
-        format.html { redirect_to expenditures_url }
-        format.json { head :no_content }
-      end
+      redirect_to expenditures_url
     else
       flash[:notice] = "You don't have sufficient rights for this action!"
       redirect_to root_path
