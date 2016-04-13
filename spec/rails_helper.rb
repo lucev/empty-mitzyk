@@ -36,6 +36,10 @@ RSpec.configure do |config|
 
   # Enable Devise authentication in specs
   config.include Devise::TestHelpers, :type => :controller
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
   config.extend ControllerMacros, :type => :controller
   config.infer_spec_type_from_file_location!
 end
