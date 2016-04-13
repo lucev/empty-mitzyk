@@ -38,5 +38,19 @@ feature 'Expenditures' do
       expect(page).to have_content 'Spent this week: 42.00 Kn'
     end
   end
+
+  describe 'on expenditures index page' do
+    before do
+      FactoryGirl.create(:expenditure, amount: 23.42, description: 'Bananas',
+        category: category, user: user)
+      visit expenditures_path
+    end
+
+    specify 'user sees expenditures listing' do
+      expect(page).to have_content 'Expenditures listing'
+      expect(page).to have_content '23.42 Kn'
+      expect(page).to have_content 'Bananas'
+    end
+  end
 end
 
