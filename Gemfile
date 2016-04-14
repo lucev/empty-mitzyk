@@ -22,6 +22,7 @@ gem 'datetimepicker-rails', git: 'https://github.com/zpaulovics/datetimepicker-r
 gem 'momentjs-rails', '~> 2.9', git: 'https://github.com/derekprior/momentjs-rails.git'
 gem 'has_scope'
 gem 'rubocop', require: false
+gem 'cancancan', '~> 1.10'
 
 group :production do
   gem 'pg'

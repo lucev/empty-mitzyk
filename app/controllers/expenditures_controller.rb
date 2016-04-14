@@ -1,7 +1,7 @@
 class ExpendituresController < ApplicationController
   include ApplicationHelper
-  
-  before_filter :authenticate_user!
+
+  load_and_authorize_resource
 
   has_scope :period_start
   has_scope :period_end
@@ -17,8 +17,6 @@ class ExpendituresController < ApplicationController
   end
 
   def show
-    @expenditure = Expenditure.find(params[:id])
-
     unless @expenditure.owner? current_user
       flash[:notice] = "You don't have sufficient rights for this action!"
       redirect_to root_path
@@ -26,7 +24,6 @@ class ExpendituresController < ApplicationController
   end
 
   def new
-    @expenditure = Expenditure.new
     @categories = current_user.categories
     @categories_array = @categories.map { |category| [category.name, category.id] }
     @ofteness = ["daily", "monthly", "extra"]
@@ -42,7 +39,6 @@ class ExpendituresController < ApplicationController
   end
 
   def edit 
-    @expenditure = Expenditure.find(params[:id])
     @ofteness = ["daily", "monthly", "extra"]
     
     if @expenditure.owner? current_user       
@@ -66,8 +62,6 @@ class ExpendituresController < ApplicationController
   end
 
   def update
-    @expenditure = Expenditure.find(params[:id])
-
     if @expenditure.owner? current_user
       if @expenditure.update_attributes(expenditure_params)
         redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
@@ -81,8 +75,6 @@ class ExpendituresController < ApplicationController
   end
 
   def destroy
-    @expenditure = Expenditure.find(params[:id])
-    
     if @expenditure.owner? current_user
       @expenditure.destroy
       redirect_to expenditures_url
