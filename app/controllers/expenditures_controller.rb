@@ -19,7 +19,7 @@ class ExpendituresController < ApplicationController
   def show
     @expenditure = Expenditure.find(params[:id])
 
-    unless@expenditure.owner? current_user
+    unless @expenditure.owner? current_user
       flash[:notice] = "You don't have sufficient rights for this action!"
       redirect_to root_path
     end
