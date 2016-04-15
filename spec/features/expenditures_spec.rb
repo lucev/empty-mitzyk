@@ -42,7 +42,7 @@ feature 'Expenditures' do
   describe 'on expenditures index page' do
     before do
       FactoryGirl.create(:expenditure, amount: 23.42, description: 'Bananas',
-        category: category, user: user)
+                                       category: category, user: user)
       visit expenditures_path
     end
 
@@ -53,4 +53,3 @@ feature 'Expenditures' do
     end
   end
 end
-
