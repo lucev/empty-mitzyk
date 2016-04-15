@@ -7,13 +7,16 @@ class UsersController < ApplicationController
   end
   
   def set_limits
-    current_user.weekly_limit = params[:user][:weekly_limit] unless params[:user][:weekly_limit].nil?
-    current_user.monthly_limit = params[:user][:monthly_limit] unless params[:user][:monthly_limit].nil?
-    
-    if current_user.save
-      redirect_to root_path
-      flash[:notice] = "Limits successfully set"
+    if current_user.update_attributes(user_params)
+      redirect_to root_path, notice: "Limits successfully set"
+    else
+      render action: "limit"
     end
   end
-  
+
+  private
+
+  def user_params
+    params.require(:user).permit(:weekly_limit, :monthly_limit)
+  end
 end
