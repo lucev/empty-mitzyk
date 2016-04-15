@@ -17,10 +17,7 @@ class ExpendituresController < ApplicationController
   end
 
   def show
-    unless @expenditure.owner? current_user
-      flash[:notice] = "You don't have sufficient rights for this action!"
-      redirect_to root_path
-    end
+
   end
 
   def new
@@ -40,14 +37,8 @@ class ExpendituresController < ApplicationController
 
   def edit 
     @ofteness = ["daily", "monthly", "extra"]
-    
-    if @expenditure.owner? current_user       
-      @categories = current_user.categories
-      @categories_array = @categories.map { |category| [category.name, category.id] }
-    else
-      flash[:notice] = "You don't have sufficient rights for this action!"
-      redirect_to root_path
-    end      
+    @categories = current_user.categories
+    @categories_array = @categories.map { |category| [category.name, category.id] }
   end
 
   def create
@@ -62,26 +53,16 @@ class ExpendituresController < ApplicationController
   end
 
   def update
-    if @expenditure.owner? current_user
-      if @expenditure.update_attributes(expenditure_params)
-        redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
-      else
-        render action: "edit"
-      end
+    if @expenditure.update_attributes(expenditure_params)
+      redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
     else
-      flash[:notice] = "You don't have sufficient rights for this action!"
-      redirect_to root_path
-    end      
+      render action: "edit"
+    end
   end
 
   def destroy
-    if @expenditure.owner? current_user
-      @expenditure.destroy
-      redirect_to expenditures_url
-    else
-      flash[:notice] = "You don't have sufficient rights for this action!"
-      redirect_to root_path
-    end
+    @expenditure.destroy
+    redirect_to expenditures_url
   end  
 
   private
