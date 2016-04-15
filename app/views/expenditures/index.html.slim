@@ -8,11 +8,11 @@ h1 Listing expenditures
     ul.dropdown-menu
       - if @category.present?
         li
-          = link_to 'All', current_scopes.merge(category: nil)
+          = link_to 'All', current_scopes.merge(category_id: nil)
         li.divider
       - current_user.categories.each do |category|
         li
-          = link_to category.name, current_scopes.merge(category: category.id)
+          = link_to category.name, current_scopes.merge(category_id: category.id)
 
   .pull-right
     = link_to 'This Week', current_scopes.merge(period_start: Date.today.beginning_of_week, period_end: nil), class: 'btn btn-default btn-sm'

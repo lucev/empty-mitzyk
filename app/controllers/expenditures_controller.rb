@@ -2,18 +2,15 @@ class ExpendituresController < ApplicationController
   include ApplicationHelper
 
   load_and_authorize_resource
+  load_and_authorize_resource :category, only: :index
 
   has_scope :period_start
   has_scope :period_end
-  has_scope :category
+  has_scope :category, as: :category_id
 
   def index
     @expenditures = apply_scopes(current_user.expenditures)
     @expenditures_sum = @expenditures.sum(:amount)
-   
-    if current_scopes[:category].present?
-      @category = current_user.categories.find_by_id(current_scopes[:category])
-    end
   end
 
   def show
