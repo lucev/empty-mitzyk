@@ -130,15 +130,15 @@ describe CategoriesController do
   end
 
   describe "DELETE destroy" do
+    let!(:category) { FactoryGirl.create(:category, user: user) }
+
     it "destroys the requested category" do
-      category = Category.create! valid_attributes
       expect {
         delete :destroy, {:id => category.to_param}
       }.to change(Category, :count).by(-1)
     end
 
     it "redirects to the categories list" do
-      category = Category.create! valid_attributes
       delete :destroy, {:id => category.to_param}
       response.should redirect_to(categories_url)
     end
