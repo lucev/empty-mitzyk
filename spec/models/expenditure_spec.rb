@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'date'
 
 describe Expenditure do
+  let(:user) { FactoryGirl.create(:user) }
 
   before :each do
     @valid_attributes = {:amount => 3.99, :date => Date.today}
@@ -13,7 +14,6 @@ describe Expenditure do
   
   it 'belongs to user' do
     expenditure = Expenditure.create!(@valid_attributes)
-    user = User.create!(:email => 'foo@example.com')
     expenditure.user = user
     expenditure.save
     

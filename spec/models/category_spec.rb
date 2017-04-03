@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe Category do
+  let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
     @valid_attributes = {
@@ -20,7 +21,6 @@ describe Category do
   end
   
   it 'belongs to user' do
-    user = User.create!(:email => 'foo@example.com')
     category = user.categories.build(:name => 'Transport')
     category.belongs_to?(user).should == true
   end

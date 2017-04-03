@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :categories
   has_many :expenditures
 
+  validates :default_currency, presence: true
+
   def week_expenditures
     expenditures.daily.
       period(Date.today.beginning_of_week, Date.today.end_of_week)

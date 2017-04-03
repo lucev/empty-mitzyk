@@ -5,11 +5,8 @@ describe User do
   it 'can be instantiated' do
     User.new.should be_an_instance_of(User)
   end
-  
-  it 'has right attributes' do
-    user = User.create!(:email => 'foo@example.com')
-    user.email.should == 'foo@example.com'
-  end
+
+  it { should validate_presence_of(:default_currency) }
   
   it 'calculates this week expenditures' do
     Expenditure.create!(amount: 5.99, date: Date.today - Date.today.wday + 2,

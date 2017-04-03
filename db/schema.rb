@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324142638) do
+ActiveRecord::Schema.define(version: 20170403180247) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140324142638) do
     t.datetime "updated_at"
     t.decimal  "weekly_limit"
     t.decimal  "monthly_limit"
+    t.string   "default_currency",       default: "USD"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
