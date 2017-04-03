@@ -270,5 +270,8 @@ DEPENDENCIES
   thread_safe
   uglifier (>= 1.0.3)
 
+RUBY VERSION
+   ruby 2.3.3p222
+
 BUNDLED WITH
-   1.11.2
+   1.13.6
