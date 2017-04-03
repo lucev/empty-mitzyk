@@ -38,6 +38,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development, :test do
