@@ -29,7 +29,7 @@
                 <li><%= link_to 'Home', root_path %></li>
                 <li><%= link_to 'Expenditures', expenditures_path(period_start: Date.today.beginning_of_month) %></li>
                 <li><%= link_to 'Categories', categories_path, :class => 'hidden-phone' %></li>
-                <li><%= link_to 'Limits', limits_path, :class => 'hidden-phone' %></li>
+                <li><%= link_to 'Settings', settings_path, :class => 'hidden-phone' %></li>
                 <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </div>
