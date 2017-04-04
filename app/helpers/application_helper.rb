@@ -8,4 +8,8 @@ module ApplicationHelper
   def first_of_month
     Date.today - Date.today.mday + 1
   end
+
+  def currencies
+    Money::Currency.all.map(&:iso_code)
+  end
 end

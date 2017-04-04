@@ -23,6 +23,9 @@ gem 'momentjs-rails', '~> 2.9', git: 'https://github.com/derekprior/momentjs-rai
 gem 'has_scope'
 gem 'rubocop', require: false
 gem 'cancancan', '~> 1.10'
+gem 'money'
+gem 'monetize'
+gem 'google_currency'
 
 group :production do
   gem 'pg'
@@ -38,6 +41,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development, :test do

@@ -10,5 +10,7 @@
     = f.input :monthly_limit, input_html: { class: 'form-control' }
   .form-group
     = f.input :weekly_limit, input_html: { class: 'form-control' }
+  .form-group
+    = f.input :default_currency, collection: currencies, input_html: { class: 'form-control' }
   .form-group.actions
     = f.submit 'Save', class: 'btn btn-primary'
