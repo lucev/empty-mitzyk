@@ -49,7 +49,9 @@ class ExpendituresController < ApplicationController
   end
 
   def update
-    if @expenditure.update_attributes(expenditure_params)
+    @expenditure.assign_attributes(expenditure_params)
+    @expenditure.amount = ExpenditureConverter.new(current_user, expenditure_params).converted_amount
+    if @expenditure.save
       redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
     else
       render action: "edit"
