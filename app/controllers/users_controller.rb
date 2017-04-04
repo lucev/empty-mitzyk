@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:weekly_limit, :monthly_limit)
+    params.require(:user).permit(:weekly_limit, :monthly_limit,
+                                 :default_currency)
   end
 end

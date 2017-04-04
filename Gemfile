@@ -23,6 +23,7 @@ gem 'momentjs-rails', '~> 2.9', git: 'https://github.com/derekprior/momentjs-rai
 gem 'has_scope'
 gem 'rubocop', require: false
 gem 'cancancan', '~> 1.10'
+gem 'money'
 
 group :production do
   gem 'pg'
