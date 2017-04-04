@@ -19,6 +19,7 @@ feature 'Expenditures' do
 
     specify 'user sees new expenditure form' do
       expect(page).to have_field 'Amount'
+      expect(page).to have_field 'Currency'
       expect(page).to have_field 'Category'
       expect(page).to have_field 'Description' 
       expect(page).to have_field 'Limit'

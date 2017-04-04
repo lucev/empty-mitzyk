@@ -38,8 +38,8 @@ class ExpendituresController < ApplicationController
   end
 
   def create
-    @expenditure = Expenditure.new(expenditure_params)
-    @expenditure.user = current_user
+    @expenditure = current_user.expenditures.build(expenditure_params)
+    @expenditure.amount = ExpenditureConverter.new(current_user, expenditure_params).converted_amount
 
     if @expenditure.save
       redirect_to root_path
@@ -65,6 +65,6 @@ class ExpendituresController < ApplicationController
 
   def expenditure_params
     params.require(:expenditure).permit(:amount, :category_id, :description,
-                                        :ofteness, :date)
+                                        :ofteness, :date, :currency)
   end
 end

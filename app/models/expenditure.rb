@@ -6,6 +6,8 @@ class Expenditure < ActiveRecord::Base
   validates_presence_of :amount
   validates_presence_of :date
 
+  attr_accessor :currency
+
   default_scope { order(date: :desc) }
 
   scope :period, -> start_at, end_at { where("date >= ? AND date <= ?", start_at, end_at) }

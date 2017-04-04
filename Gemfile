@@ -24,6 +24,8 @@ gem 'has_scope'
 gem 'rubocop', require: false
 gem 'cancancan', '~> 1.10'
 gem 'money'
+gem 'monetize'
+gem 'google_currency'
 
 group :production do
   gem 'pg'

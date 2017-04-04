@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def currencies
-    Money::Currency.all.map{ |c| c.iso_code }
+    Money::Currency.all.map(&:iso_code)
   end
 end
