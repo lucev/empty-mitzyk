@@ -9,7 +9,7 @@ class ExpendituresController < ApplicationController
   has_scope :category, as: :category_id
 
   def index
-    @expenditures = apply_scopes(current_user.expenditures)
+    @expenditures = apply_scopes(current_user.expenditures).order(date: :desc, created_at: :desc)
     @expenditures_sum = @expenditures.sum(:amount)
   end
 
