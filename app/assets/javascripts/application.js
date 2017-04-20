@@ -16,5 +16,7 @@
 //= require bootstrap
 //= require moment
 //= require bootstrap-datetimepicker
+//= require lib/jquery.tablesorter
 //= require pickers
+//= require expenditures
 

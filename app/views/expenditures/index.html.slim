@@ -39,23 +39,25 @@ h2= number_to_currency(@expenditures_sum, :locale => :hr)
   
 
 h2 Expenditures listing
-table.table.table-striped.table-hover.table-condensed
-  tr
-    th Amount
-    th Category
-    th Description
-    th Date
-    th
-    th
-
-  - @expenditures.each do |expenditure|
+table.table.table-striped.table-hover.table-condensed.tablesorter
+  thead
     tr
-      td= number_to_currency(expenditure.amount,:locale => :hr)
-      td= expenditure.category.name
-      td= expenditure.description
-      td= I18n.l expenditure.date, :locale => :hr
-      td= link_to 'Edit', edit_expenditure_path(expenditure)
-      td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
+      th Amount
+      th Category
+      th Description
+      th Date
+      th
+      th
+
+  tbody
+    - @expenditures.each do |expenditure|
+      tr
+        td= number_to_currency(expenditure.amount,:locale => :hr)
+        td= expenditure.category.name
+        td= expenditure.description
+        td= I18n.l expenditure.date, :locale => :hr
+        td= link_to 'Edit', edit_expenditure_path(expenditure)
+        td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
 
 br
 
