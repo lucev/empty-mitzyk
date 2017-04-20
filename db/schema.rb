@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404083238) do
+ActiveRecord::Schema.define(version: 20170420111729) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +19,10 @@ ActiveRecord::Schema.define(version: 20170404083238) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "position"
+    t.boolean  "active",     default: true
   end
+
+  add_index "categories", ["active"], name: "index_categories_on_active"
 
   create_table "expenditures", force: :cascade do |t|
     t.decimal  "amount"

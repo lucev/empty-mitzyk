@@ -17,7 +17,7 @@ class ExpendituresController < ApplicationController
   end
 
   def new
-    @categories = current_user.categories
+    @categories = current_user.categories.active
     @categories_array = @categories.map { |category| [category.name, category.id] }
     @ofteness = ["daily", "monthly", "extra"]
     @month_percentage = current_user.month_percentage
