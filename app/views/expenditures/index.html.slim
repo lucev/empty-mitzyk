@@ -52,7 +52,8 @@ table.table.table-striped.table-hover.table-condensed.tablesorter
   tbody
     - @expenditures.each do |expenditure|
       tr
-        td= number_to_currency(expenditure.amount,:locale => :hr)
+        td data={ :'sort-value' => expenditure.amount }
+          = number_to_currency(expenditure.amount,:locale => :hr)
         td= expenditure.category.name
         td= expenditure.description
         td= I18n.l expenditure.date, :locale => :hr
