@@ -10,6 +10,7 @@ class ExpendituresController < ApplicationController
 
   def index
     @expenditures = apply_scopes(current_user.expenditures).order(date: :desc, created_at: :desc)
+    @category_expenditures = @expenditures.group(:category).reorder('sum_amount DESC').sum(:amount)
     @expenditures_sum = @expenditures.sum(:amount)
   end
 

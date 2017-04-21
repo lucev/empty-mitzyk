@@ -10,7 +10,7 @@ h1 Listing expenditures
         li
           = link_to 'All', current_scopes.merge(category_id: nil)
         li.divider
-      - current_user.categories.each do |category|
+      - current_user.categories.active.each do |category|
         li
           = link_to category.name, current_scopes.merge(category_id: category.id)
 
@@ -38,6 +38,20 @@ h3 Expenditures sum:
 h2= number_to_currency(@expenditures_sum, :locale => :hr)
   
 
+h2 Expenditures by category
+table.table.table-striped.table-hover.table-condensed.tablesorter
+  thead
+    tr
+      th Category
+      th Amount
+  tbody
+    - @category_expenditures.each do |category_expenditure|
+      tr
+        td = category_expenditure[0].name
+        td = number_to_currency(category_expenditure[1], locale: :hr)
+
+
+
 h2 Expenditures listing
 table.table.table-striped.table-hover.table-condensed.tablesorter
   thead
@@ -50,15 +64,7 @@ table.table.table-striped.table-hover.table-condensed.tablesorter
       th
 
   tbody
-    - @expenditures.each do |expenditure|
-      tr
-        td data={ :'sort-value' => expenditure.amount }
-          = number_to_currency(expenditure.amount,:locale => :hr)
-        td= expenditure.category.name
-        td= expenditure.description
-        td= I18n.l expenditure.date, :locale => :hr
-        td= link_to 'Edit', edit_expenditure_path(expenditure)
-        td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
+    = render @expenditures
 
 br
 

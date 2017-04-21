@@ -1,0 +1,8 @@
+tr
+  td data={ :'sortValue' => expenditure.amount }
+    = number_to_currency(expenditure.amount,:locale => :hr)
+  td= expenditure.category.name
+  td= expenditure.description
+  td= I18n.l expenditure.date, :locale => :hr
+  td= link_to 'Edit', edit_expenditure_path(expenditure)
+  td= link_to 'Delete', expenditure, :confirm => 'Are you sure?', :method => :delete
