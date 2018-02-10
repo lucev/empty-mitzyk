@@ -37,6 +37,18 @@ class User < ActiveRecord::Base
     month_expenditures.sum(:amount)
   end
 
+  def available_this_month
+    return 0 if monthly_limit.blank?
+
+    monthly_limit - spent_this_month
+  end
+
+  def available_this_week
+    return 0 if weekly_limit.blank?
+
+    weekly_limit - spent_this_week
+  end
+
   def lower_tolerance
     (weekly_limit/7)*Date.today.wday*(1 - Rails.configuration.limit_tolerance)
   end

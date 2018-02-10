@@ -1,20 +1,31 @@
 require 'rails_helper'
 
 feature 'Expenditures' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryGirl.create(:user, monthly_limit: 100.00, weekly_limit: 30.00) }
   let!(:category) { FactoryGirl.create(:category, name: 'Food', user: user) }
+  let!(:expenditure) { FactoryGirl.create(:expenditure, amount: 20.00, ofteness: 'daily', user: user, category: category) }
 
-  before { login_as user, scope: :user }
+  before do
+    login_as user, scope: :user
+  end
 
   describe 'on home page' do
     before { visit new_user_registration_path }
 
     specify 'user sees monthly expenditures' do
-      expect(page).to have_content 'Spent this month: 0.00 Kn'
+      expect(page).to have_content 'Spent this month: 20.00 Kn'
     end
  
     specify 'user sees weekly expenditures' do
-      expect(page).to have_content 'Spent this week: 0.00 Kn'
+      expect(page).to have_content 'Spent this week: 20.00 Kn'
+    end
+
+    specify 'user sees available money' do
+      expect(page).to have_content '(80.00 Kn available)'
+    end
+
+    specify 'user sees available money' do
+      expect(page).to have_content '(10.00 Kn available)'
     end
 
     specify 'user sees new expenditure form' do
@@ -35,8 +46,8 @@ feature 'Expenditures' do
       fill_in 'Date', with: Date.today
       click_button 'Save'
 
-      expect(page).to have_content 'Spent this month: 42.00 Kn'
-      expect(page).to have_content 'Spent this week: 42.00 Kn'
+      expect(page).to have_content 'Spent this month: 62.00 Kn'
+      expect(page).to have_content 'Spent this week: 62.00 Kn'
     end
   end
 

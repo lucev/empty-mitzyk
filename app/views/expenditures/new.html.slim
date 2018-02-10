@@ -6,12 +6,12 @@ table
     td.summary
       = 'Spent this month: '
     td.spendings
-      = number_to_currency(current_user.spent_this_month, :locale => :hr)
+      = "#{number_to_currency(current_user.spent_this_month, :locale => :hr)} <small>(#{number_to_currency(current_user.available_this_month, :locale => :hr)} available)</small>".html_safe
   tr
     td.summary
       = 'Spent this week: '
     td.spendings
       span class=("#{h weekly_spending_status}")
-        = number_to_currency(current_user.spent_this_week, :locale => :hr)
+        = "#{number_to_currency(current_user.spent_this_week, :locale => :hr)} <small>(#{number_to_currency(current_user.available_this_week, :locale => :hr)} available)</small>".html_safe
 
 = render 'form'
