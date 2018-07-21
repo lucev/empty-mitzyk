@@ -28,7 +28,7 @@ gem 'monetize'
 gem 'money-open-exchange-rates'
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.21'
 end
 
 group :development do
