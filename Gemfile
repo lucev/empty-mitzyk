@@ -25,7 +25,7 @@ gem 'rubocop', require: false
 gem 'cancancan', '~> 1.10'
 gem 'money'
 gem 'monetize'
-gem 'google_currency'
+gem 'money-open-exchange-rates'
 
 group :production do
   gem 'pg'
@@ -46,4 +46,5 @@ end
 
 group :development, :test do
   gem 'pry'
+  gem 'dotenv-rails'
 end
