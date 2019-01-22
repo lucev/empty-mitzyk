@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.3.3'
 
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 5.2'
 
 gem 'slim'
 
@@ -33,6 +33,7 @@ end
 
 group :development do
   gem 'sqlite3'
+  gem 'listen'
 end
 
 group :test do
@@ -42,6 +43,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do

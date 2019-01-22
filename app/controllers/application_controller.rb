@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   private  
   def mobile?  

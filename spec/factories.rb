@@ -5,11 +5,13 @@ FactoryGirl.define do
   end
 
   factory :expenditure do
+    association :category, factory: :category
     amount '3.99'
     date Date.today
   end
 
   factory :category do
+    association :user, factory: :user
     name 'transportation'
     position 1
   end

@@ -1,4 +1,4 @@
-Mitzyk::Application.routes.draw do
+Rails.application.routes.draw do
   resources :expenditures
 
   devise_for :users

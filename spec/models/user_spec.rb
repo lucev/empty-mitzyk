@@ -9,9 +9,9 @@ describe User do
   it { should validate_presence_of(:default_currency) }
   
   it 'calculates this week expenditures' do
-    Expenditure.create!(amount: 5.99, date: Date.today - Date.today.wday + 2,
+    FactoryGirl.create(:expenditure, amount: 5.99, date: Date.today - Date.today.wday + 2,
                         ofteness: 'daily', user: user)
-    Expenditure.create!(amount: 2, date: Date.today - Date.today.wday + 3,
+    FactoryGirl.create(:expenditure, amount: 2, date: Date.today - Date.today.wday + 3,
                         ofteness: 'daily', user: user)
     
     user.spent_this_week.should == 7.99

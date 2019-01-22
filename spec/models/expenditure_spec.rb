@@ -13,7 +13,7 @@ describe Expenditure do
   end
   
   it 'belongs to user' do
-    expenditure = Expenditure.create!(@valid_attributes)
+    expenditure = FactoryGirl.build(:expenditure)
     expenditure.user = user
     expenditure.save
     

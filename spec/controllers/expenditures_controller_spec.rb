@@ -4,10 +4,11 @@ require 'date'
 describe ExpendituresController do
 
   let(:user) { FactoryGirl.create :user }
+  let(:category) { FactoryGirl.create :category }
   let(:expenditure) { FactoryGirl.create :expenditure, user: user }
 
   def valid_attributes
-    { amount: '3.99', date: Date.today.to_s }
+    { amount: '3.99', date: Date.today.to_s, category_id: category.id}
   end
 
   def invalid_attributes
@@ -26,7 +27,7 @@ describe ExpendituresController do
 
   describe "GET show" do
     it "assigns the requested expenditure as @expenditure" do
-      get :show, {:id => expenditure.to_param}
+      get :show, params: {:id => expenditure.to_param}
 
       assigns(:expenditure).should eq(expenditure)
     end
@@ -41,7 +42,7 @@ describe ExpendituresController do
 
   describe "GET edit" do
     it "assigns the requested expenditure as @expenditure" do
-      get :edit, {:id => expenditure.to_param}
+      get :edit, params: {:id => expenditure.to_param}
 
       assigns(:expenditure).should eq(expenditure)
     end
@@ -51,18 +52,18 @@ describe ExpendituresController do
     describe "with valid params" do
       it "creates a new Expenditure" do
         expect {
-          post :create, {:expenditure => valid_attributes}
+          post :create, params: {:expenditure => valid_attributes}
         }.to change(Expenditure, :count).by(1)
       end
 
       it "assigns a newly created expenditure as @expenditure" do
-        post :create, {:expenditure => valid_attributes}
+        post :create, params: {:expenditure => valid_attributes}
         assigns(:expenditure).should be_a(Expenditure)
         assigns(:expenditure).should be_persisted
       end
 
       it "redirects to home page" do
-        post :create, {:expenditure => valid_attributes}
+        post :create, params: {:expenditure => valid_attributes}
         response.should redirect_to(root_path)
       end
     end
@@ -71,14 +72,14 @@ describe ExpendituresController do
       it "assigns a newly created but unsaved expenditure as @expenditure" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => invalid_attributes }
+        post :create, params: {:expenditure => invalid_attributes }
         assigns(:expenditure).should be_a_new(Expenditure)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, {:expenditure => invalid_attributes }
+        post :create, params: {:expenditure => invalid_attributes }
         response.should render_template("new")
       end
     end
@@ -87,13 +88,13 @@ describe ExpendituresController do
   describe "PUT update" do
     describe "with valid params" do
       it "assigns the requested expenditure as @expenditure" do
-        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
+        put :update, params: {:id => expenditure.to_param, :expenditure => valid_attributes}
 
         assigns(:expenditure).should eq(expenditure)
       end
 
       it "redirects to the expenditure" do
-        put :update, {:id => expenditure.to_param, :expenditure => valid_attributes}
+        put :update, params: {:id => expenditure.to_param, :expenditure => valid_attributes}
 
         response.should redirect_to(expenditure)
       end
@@ -103,7 +104,7 @@ describe ExpendituresController do
       it "assigns the expenditure as @expenditure" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
+        put :update, params: {:id => expenditure.to_param, expenditure: invalid_attributes }
 
         assigns(:expenditure).should eq(expenditure)
       end
@@ -111,7 +112,7 @@ describe ExpendituresController do
       it "re-renders the 'edit' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, {:id => expenditure.to_param, expenditure: invalid_attributes }
+        put :update, params: {:id => expenditure.to_param, expenditure: invalid_attributes }
 
         response.should render_template("edit")
       end
@@ -122,12 +123,12 @@ describe ExpendituresController do
     let!(:expenditure) { FactoryGirl.create(:expenditure, user: user) }
     it "destroys the requested expenditure" do
       expect {
-        delete :destroy, {:id => expenditure.to_param}
+        delete :destroy, params: {:id => expenditure.to_param}
       }.to change(Expenditure, :count).by(-1)
     end
 
     it "redirects to the expenditures list" do
-      delete :destroy, {:id => expenditure.to_param}
+      delete :destroy, params: {:id => expenditure.to_param}
 
       response.should redirect_to(expenditures_url)
     end
