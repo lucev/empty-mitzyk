@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Category do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   before(:each) do
     @valid_attributes = {

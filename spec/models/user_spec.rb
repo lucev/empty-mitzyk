@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe User do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
   it 'can be instantiated' do
     User.new.should be_an_instance_of(User)
   end
@@ -9,9 +9,9 @@ describe User do
   it { should validate_presence_of(:default_currency) }
   
   it 'calculates this week expenditures' do
-    FactoryGirl.create(:expenditure, amount: 5.99, date: Date.today - Date.today.wday + 2,
+    FactoryBot.create(:expenditure, amount: 5.99, date: Date.today - Date.today.wday + 2,
                         ofteness: 'daily', user: user)
-    FactoryGirl.create(:expenditure, amount: 2, date: Date.today - Date.today.wday + 3,
+    FactoryBot.create(:expenditure, amount: 2, date: Date.today - Date.today.wday + 3,
                         ofteness: 'daily', user: user)
     
     user.spent_this_week.should == 7.99

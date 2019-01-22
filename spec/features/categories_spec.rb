@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 feature 'Categories' do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   before { login_as user, scope: :user }
 
   describe 'on categories index page' do
 
     before do
-      FactoryGirl.create(:category, name: 'Transportation', user: user) 
+      FactoryBot.create(:category, name: 'Transportation', user: user) 
       visit categories_path
     end
 
@@ -38,8 +38,8 @@ feature 'Categories' do
   end
 
   describe 'on home page' do
-    let!(:active_category) { FactoryGirl.create(:category, name: 'Active category', active: true, user: user) }
-    let!(:inactive_category) { FactoryGirl.create(:category, name: 'Inactive category', active: false, user: user) }
+    let!(:active_category) { FactoryBot.create(:category, name: 'Active category', active: true, user: user) }
+    let!(:inactive_category) { FactoryBot.create(:category, name: 'Inactive category', active: false, user: user) }
 
     before { visit root_path }
 

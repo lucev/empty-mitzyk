@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe CategoriesController do
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:category) { FactoryGirl.create(:category, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:category) { FactoryBot.create(:category, user: user) }
 
   def valid_attributes
     {:name => 'transportation', :position => '1'}
@@ -130,7 +130,7 @@ describe CategoriesController do
   end
 
   describe "DELETE destroy" do
-    let!(:category) { FactoryGirl.create(:category, user: user) }
+    let!(:category) { FactoryBot.create(:category, user: user) }
 
     it "destroys the requested category" do
       expect {

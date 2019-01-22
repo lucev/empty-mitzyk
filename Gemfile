@@ -39,7 +39,7 @@ end
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: nil
   gem 'shoulda-matchers', '~> 3.1'

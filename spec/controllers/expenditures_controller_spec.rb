@@ -3,9 +3,9 @@ require 'date'
 
 describe ExpendituresController do
 
-  let(:user) { FactoryGirl.create :user }
-  let(:category) { FactoryGirl.create :category }
-  let(:expenditure) { FactoryGirl.create :expenditure, user: user }
+  let(:user) { FactoryBot.create :user }
+  let(:category) { FactoryBot.create :category }
+  let(:expenditure) { FactoryBot.create :expenditure, user: user }
 
   def valid_attributes
     { amount: '3.99', date: Date.today.to_s, category_id: category.id}
@@ -120,7 +120,7 @@ describe ExpendituresController do
   end
 
   describe "DELETE destroy" do
-    let!(:expenditure) { FactoryGirl.create(:expenditure, user: user) }
+    let!(:expenditure) { FactoryBot.create(:expenditure, user: user) }
     it "destroys the requested expenditure" do
       expect {
         delete :destroy, params: {:id => expenditure.to_param}

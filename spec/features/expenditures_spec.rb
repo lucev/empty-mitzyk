@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Expenditures' do
-  let(:user) { FactoryGirl.create(:user, monthly_limit: 100.00, weekly_limit: 30.00) }
-  let!(:category) { FactoryGirl.create(:category, name: 'Food', user: user) }
-  let!(:expenditure) { FactoryGirl.create(:expenditure, amount: 20.00, ofteness: 'daily', user: user, category: category) }
+  let(:user) { FactoryBot.create(:user, monthly_limit: 100.00, weekly_limit: 30.00) }
+  let!(:category) { FactoryBot.create(:category, name: 'Food', user: user) }
+  let!(:expenditure) { FactoryBot.create(:expenditure, amount: 20.00, ofteness: 'daily', user: user, category: category) }
 
   before do
     login_as user, scope: :user
@@ -53,7 +53,7 @@ feature 'Expenditures' do
 
   describe 'on expenditures index page' do
     before do
-      FactoryGirl.create(:expenditure, amount: 23.42, description: 'Bananas',
+      FactoryBot.create(:expenditure, amount: 23.42, description: 'Bananas',
                                        category: category, user: user)
       visit expenditures_path
     end

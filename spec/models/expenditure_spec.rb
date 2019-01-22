@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'date'
 
 describe Expenditure do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   before :each do
     @valid_attributes = {:amount => 3.99, :date => Date.today}
@@ -13,7 +13,7 @@ describe Expenditure do
   end
   
   it 'belongs to user' do
-    expenditure = FactoryGirl.build(:expenditure)
+    expenditure = FactoryBot.build(:expenditure)
     expenditure.user = user
     expenditure.save
     

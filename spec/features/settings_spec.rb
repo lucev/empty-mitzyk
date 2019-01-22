@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Settings' do
   let(:user) do
-    FactoryGirl.create(:user, monthly_limit: 100.00, weekly_limit: 20.00)
+    FactoryBot.create(:user, monthly_limit: 100.00, weekly_limit: 20.00)
   end
 
   before { login_as user, scope: :user }
