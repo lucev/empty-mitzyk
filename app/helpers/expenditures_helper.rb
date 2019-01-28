@@ -4,13 +4,13 @@ module ExpendituresHelper
     spendings = current_user.spent_this_week
 
     if current_user.weekly_limit.blank?
-      status = ''
+      ''
     elsif spendings < current_user.lower_tolerance
-      status = 'green'
+      'green'
     elsif spendings > current_user.upper_tolerance
-      status = 'red'
+      'red'
     else
-      status = 'yellow'
+      'yellow'
     end
   end
 
@@ -24,14 +24,14 @@ module ExpendituresHelper
   end
 
   def ofteness
-    ["daily", "monthly", "extra"]
+    ['daily', 'monthly', 'extra']
   end
 
   def progressbar_class
     if current_user.month_percentage < 80
-      "progressbar_green"
+      'progressbar_green'
     else
-      "progressbar_yellow"
+      'progressbar_yellow'
     end
   end
 

@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   
   def month_percentage
     return 100 if monthly_limit.nil?
+
     ((spent_this_month / monthly_limit) * 100).round(2)
   end
 

@@ -1,6 +1,5 @@
 class ExpenditureConverter
   def initialize(user, params = {})
-
     @user = user
     @amount = params[:amount]
     @currency = params[:currency]

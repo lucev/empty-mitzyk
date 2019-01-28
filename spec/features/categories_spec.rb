@@ -6,7 +6,6 @@ feature 'Categories' do
   before { login_as user, scope: :user }
 
   describe 'on categories index page' do
-
     before do
       FactoryBot.create(:category, name: 'Transportation', user: user) 
       visit categories_path
@@ -46,7 +45,5 @@ feature 'Categories' do
     specify 'user sees only active categories' do
       expect(page).to have_select 'Category', options: ['Active category']
     end
-    
   end
-
 end

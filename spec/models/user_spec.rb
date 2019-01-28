@@ -10,9 +10,9 @@ describe User do
   
   it 'calculates this week expenditures' do
     FactoryBot.create(:expenditure, amount: 5.99, date: Date.today - Date.today.wday + 2,
-                        ofteness: 'daily', user: user)
+                                    ofteness: 'daily', user: user)
     FactoryBot.create(:expenditure, amount: 2, date: Date.today - Date.today.wday + 3,
-                        ofteness: 'daily', user: user)
+                                    ofteness: 'daily', user: user)
     
     user.spent_this_week.should == 7.99
   end  

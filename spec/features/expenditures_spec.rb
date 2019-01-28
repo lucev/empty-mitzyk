@@ -54,7 +54,7 @@ feature 'Expenditures' do
   describe 'on expenditures index page' do
     before do
       FactoryBot.create(:expenditure, amount: 23.42, description: 'Bananas',
-                                       category: category, user: user)
+                                      category: category, user: user)
       visit expenditures_path
     end
 
