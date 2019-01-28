@@ -10,8 +10,6 @@ class ExpendituresController < ApplicationController
 
   def index
     @expenditures = apply_scopes(current_user.expenditures).order(date: :desc, created_at: :desc)
-    @category_expenditures = @expenditures.group(:category).reorder('sum_amount DESC').sum(:amount)
-    @expenditures_sum = @expenditures.sum(:amount)
   end
 
   def show
@@ -19,23 +17,10 @@ class ExpendituresController < ApplicationController
 
   def new
     @categories = current_user.categories.active
-    @categories_array = @categories.map { |category| [category.name, category.id] }
-    @ofteness = ["daily", "monthly", "extra"]
-    @month_percentage = current_user.month_percentage
-    if @month_percentage < 80
-      @class = "progressbar_green"
-    else
-      @class = "progressbar_yellow"
-      if @month_percentage > 100
-        @month_percentage = 100
-      end
-    end
   end
 
   def edit 
-    @ofteness = ["daily", "monthly", "extra"]
     @categories = current_user.categories
-    @categories_array = @categories.map { |category| [category.name, category.id] }
   end
 
   def create

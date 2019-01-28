@@ -35,7 +35,7 @@ h1 Listing expenditures
         = I18n.l(Date.strptime(current_scopes[:period_end]), format: :long)
 
 h3 Expenditures sum:
-h2= number_to_currency(@expenditures_sum, :locale => :hr)
+h2= number_to_currency(expenditures_sum, :locale => :hr)
   
 
 h2 Expenditures by category
@@ -45,7 +45,7 @@ table.table.table-striped.table-hover.table-condensed.tablesorter
       th Category
       th Amount
   tbody
-    - @category_expenditures.each do |category_expenditure|
+    - category_expenditures.each do |category_expenditure|
       tr
         td = category_expenditure[0].name
         td = number_to_currency(category_expenditure[1], locale: :hr)
