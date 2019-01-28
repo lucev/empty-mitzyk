@@ -1,10 +1,17 @@
 module ExpendituresHelper
 
   def weekly_spending_status
-    return '' if current_user.weekly_limit.nil?
-    return 'green' if current_user.spent_this_week < current_user.lower_tolerance
-    return 'red' if current_user.spent_this_week > current_user.upper_tolerance
-    'yellow'
+    spendings = current_user.spent_this_week
+
+    if current_user.weekly_limit.blank?
+      status = ''
+    elsif spendings < current_user.lower_tolerance
+      status = 'green'
+    elsif spendings > current_user.upper_tolerance
+      status = 'red'
+    else
+      status = 'yellow'
+    end
   end
 
   def month_percentage
