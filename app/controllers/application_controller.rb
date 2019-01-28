@@ -7,10 +7,4 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
 
-  private  
-  def mobile?  
-    (request.user_agent =~ /Mobile|webOS/).nil?
-  end
-
-  helper_method :mobile?
 end
