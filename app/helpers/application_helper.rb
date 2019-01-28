@@ -2,11 +2,11 @@ module ApplicationHelper
 
   # First day of week, assuming that week begins on Monday
   def first_of_week
-    Date.today - (Date.today-1).wday
+    Date.today.at_beginning_of_week
   end
   
   def first_of_month
-    Date.today - Date.today.mday + 1
+    Date.today.at_beginning_of_month
   end
 
   def currencies
