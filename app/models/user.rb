@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
   end
   
   def month_percentage
-    return 100 if self.monthly_limit.nil?
-    ((self.spent_this_month / self.monthly_limit)*100).round(2)
+    return 100 if monthly_limit.nil?
+    ((spent_this_month / monthly_limit) * 100).round(2)
   end
 
   def spent_this_week
@@ -58,6 +58,6 @@ class User < ActiveRecord::Base
   end
 
   def categories_last_position
-    self.categories.order(:position).last.position
+    categories.order(:position).last.position
   end
 end
