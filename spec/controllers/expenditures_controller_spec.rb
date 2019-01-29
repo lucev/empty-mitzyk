@@ -1,7 +1,7 @@
 require 'rails_helper'
 require 'date'
 
-describe ExpendituresController do
+describe ExpendituresController, type: :controller do
 
   let(:user) { FactoryBot.create :user }
   let(:category) { FactoryBot.create :category }
@@ -17,121 +17,140 @@ describe ExpendituresController do
 
   before { sign_in user }
 
-  describe "GET index" do
-    it "assigns all expenditures as @expenditures" do
-      get :index, {}
+  describe 'GET index' do
+    subject { get :index }
 
-      assigns(:expenditures).should eq([expenditure])
+    it 'returns http 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
+    it 'assigns all expenditures as @expenditures' do
+      subject
+      expect(assigns(:expenditures)).to eq([expenditure])
     end
   end
 
-  describe "GET show" do
-    it "assigns the requested expenditure as @expenditure" do
-      get :show, params: {:id => expenditure.to_param}
+  describe 'GET show' do
+    subject { get :show, params: { id: expenditure.to_param } }
 
+    it 'returns http 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
+    it 'assigns the requested expenditure as @expenditure' do
+      subject
+      expect(assigns(:expenditure)).to eq(expenditure)
+    end
+  end
+
+  describe 'GET new' do
+    subject { get :new, {} }
+
+    it 'returns http 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
+    it 'assgns a new expenditure as @expenditure' do
+      subject
+      expect(assigns(:expenditure)).to be_a_new(Expenditure)
+    end
+  end
+
+  describe 'GET edit' do
+    subject { get :edit, params: { id: expenditure.to_param } }
+
+    it 'returns http 200' do
+      subject
+      expect(response).to have_http_status(200)
+    end
+    it 'assigns the requested expenditure as @expenditure' do
+      subject
       assigns(:expenditure).should eq(expenditure)
     end
   end
 
-  describe "GET new" do
-    it "assigns a new expenditure as @expenditure" do
-      get :new, {}
-      assigns(:expenditure).should be_a_new(Expenditure)
-    end
-  end
+  describe 'POST create' do
+    context 'with valid params' do
+      subject { post :create, params: { expenditure: valid_attributes } }
 
-  describe "GET edit" do
-    it "assigns the requested expenditure as @expenditure" do
-      get :edit, params: {:id => expenditure.to_param}
-
-      assigns(:expenditure).should eq(expenditure)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Expenditure" do
-        expect {
-          post :create, params: {:expenditure => valid_attributes}
-        }.to change(Expenditure, :count).by(1)
+      it 'returns http 302' do
+        subject
+        expect(response).to have_http_status(302)
       end
-
-      it "assigns a newly created expenditure as @expenditure" do
-        post :create, params: {:expenditure => valid_attributes}
-        assigns(:expenditure).should be_a(Expenditure)
-        assigns(:expenditure).should be_persisted
+      it 'redirects to home page' do
+        subject
+        expect(response).to redirect_to(root_path)
       end
-
-      it "redirects to home page" do
-        post :create, params: {:expenditure => valid_attributes}
-        response.should redirect_to(root_path)
+      it 'creates a new Expenditure' do
+        expect { subject }.to change(Expenditure, :count).by(1)
+      end
+      it 'assigns a newly created expenditure as @expenditure' do
+        subject
+        expect(assigns(:expenditure)).to be_a(Expenditure)
+        expect(assigns(:expenditure)).to be_persisted
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved expenditure as @expenditure" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, params: {:expenditure => invalid_attributes }
-        assigns(:expenditure).should be_a_new(Expenditure)
-      end
+    context 'with invalid params' do
+      subject { post :create, params: { expenditure: invalid_attributes } }
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Expenditure.any_instance.stub(:save).and_return(false)
-        post :create, params: {:expenditure => invalid_attributes }
-        response.should render_template("new")
+      it 'returns http 422' do
+        subject
+        expect(response).to have_http_status(422)
+      end
+      it 're-renders the new template' do
+        subject
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "assigns the requested expenditure as @expenditure" do
-        put :update, params: {:id => expenditure.to_param, :expenditure => valid_attributes}
+  describe 'PUT update' do
+   context 'with valid params' do
+      subject { put :update, params: { id: expenditure.to_param, expenditure: valid_attributes } }
 
-        assigns(:expenditure).should eq(expenditure)
+      it 'assigns the requested expenditure as @expenditure' do
+        subject
+        expect(assigns(:expenditure)).to eq(expenditure)
       end
-
-      it "redirects to the expenditure" do
-        put :update, params: {:id => expenditure.to_param, :expenditure => valid_attributes}
-
-        response.should redirect_to(expenditure)
+      it 'returns http 302' do
+        subject
+        expect(response).to have_http_status(302)
+      end
+      it 'redirects to the expenditure' do
+        subject
+        expect(response).to redirect_to(expenditure)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the expenditure as @expenditure" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, params: {:id => expenditure.to_param, expenditure: invalid_attributes }
+    context 'with invalid params' do
+      subject { put :update, params: { id: expenditure.to_param, expenditure: invalid_attributes } }
 
-        assigns(:expenditure).should eq(expenditure)
+      it 'returns http 422' do
+        subject
+        expect(response).to have_http_status(422)
       end
-
-      it "re-renders the 'edit' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Expenditure.any_instance.stub(:save).and_return(false)
-        put :update, params: {:id => expenditure.to_param, expenditure: invalid_attributes }
-
+      it 're-renders the edit template' do
+        subject
         response.should render_template("edit")
       end
     end
   end
 
-  describe "DELETE destroy" do
-    let!(:expenditure) { FactoryBot.create(:expenditure, user: user) }
-    it "destroys the requested expenditure" do
-      expect {
-        delete :destroy, params: {:id => expenditure.to_param}
-      }.to change(Expenditure, :count).by(-1)
+  describe 'DELETE destroy' do
+    let!(:expenditure) { FactoryBot.create :expenditure, user: user }
+
+    subject { delete :destroy, params: { id: expenditure.to_param } }
+    it 'destroys the requested expenditure' do
+      expect { subject }.to change(Expenditure, :count).by(-1)
     end
-
-    it "redirects to the expenditures list" do
-      delete :destroy, params: {:id => expenditure.to_param}
-
-      response.should redirect_to(expenditures_url)
+    it 'returns http 302' do
+      subject
+      expect(response).to have_http_status(302)
+    end
+    it 'redirects to the expenditures list' do
+      subject
+      expect(response).to redirect_to(expenditures_url)
     end
   end
-
 end

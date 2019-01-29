@@ -30,7 +30,7 @@ class ExpendituresController < ApplicationController
     if @expenditure.save
       redirect_to root_path
     else
-      render action: "new"
+      render action: 'new', status: :unprocessable_entity
     end
   end
 
@@ -40,7 +40,7 @@ class ExpendituresController < ApplicationController
     if @expenditure.save
       redirect_to @expenditure, notice: 'Expenditure was successfully updated.'
     else
-      render action: "edit"
+      render action: 'edit', status: :unprocessable_entity
     end
   end
 
